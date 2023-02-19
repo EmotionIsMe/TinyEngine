@@ -153,6 +153,7 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClInclude Include="src\Platform\OpenGL\imGuiOpenGLRenderer.h" />
+    <ClInclude Include="src\Platform\Windows\WindowsInput.h" />
     <ClInclude Include="src\Platform\Windows\WindowsWindow.h" />
     <ClInclude Include="src\TinyEngine.h" />
     <ClInclude Include="src\TinyEngine\Application.h" />
@@ -162,6 +163,7 @@
     <ClInclude Include="src\TinyEngine\Events\Event.h" />
     <ClInclude Include="src\TinyEngine\Events\KeyEvent.h" />
     <ClInclude Include="src\TinyEngine\Events\MouseEvent.h" />
+    <ClInclude Include="src\TinyEngine\Input.h" />
     <ClInclude Include="src\TinyEngine\Layer.h" />
     <ClInclude Include="src\TinyEngine\LayerStack.h" />
     <ClInclude Include="src\TinyEngine\Log.h" />
@@ -171,6 +173,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\Platform\OpenGL\imGuiOpenGLRenderer.cpp" />
+    <ClCompile Include="src\Platform\Windows\WindowsInput.cpp" />
     <ClCompile Include="src\Platform\Windows\WindowsWindow.cpp" />
     <ClCompile Include="src\TinyEngine\Application.cpp" />
     <ClCompile Include="src\TinyEngine\Layer.cpp" />
@@ -195,4 +198,4 @@
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
   </ImportGroup>
-</Project>
+</Project> 

@@ -4,6 +4,8 @@
 
 #include <glad/glad.h>
 
+#include "Input.h"
+
 namespace TinyEngine {
 
 	#define BIND_EVENT_FN(fn) std::bind(&Application::fn, this, std::placeholders::_1)
@@ -61,7 +63,8 @@ namespace TinyEngine {
 
 			for (Layer* layer : m_LayerStack)
 				layer->OnUpdate();
-
+			auto[x, y] = Input::GetMousePosition();
+			TE_CORE_TRACE("{0},{1}", x, y);
 			m_Window->OnUpdate();
 		}
 	}
