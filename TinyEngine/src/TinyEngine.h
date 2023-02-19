@@ -1,12 +1,12 @@
 #pragma once
 #include "tepch.h"
-#include <stdio.h>
-
 #include "TinyEngine/Core.h"
 #include "TinyEngine/Application.h"
 #include "TinyEngine/Layer.h"
-/*    log        */
-#include "TinyEngine/Log.h"
+
+#include "TinyEngine/Input.h"
+#include "TinyEngine/KeyCodes.h"
+#include "TinyEngine/MouseButtonCodes.h"
 
 #include "TinyEngine/imGui/ImGuiLayer.h"
 

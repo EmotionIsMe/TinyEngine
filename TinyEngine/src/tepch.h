@@ -10,7 +10,10 @@
 #include <vector>
 #include <unordered_map>
 #include <unordered_set>
+#include <stdio.h>
+/*    log        */
 #include "TinyEngine/Log.h"
+
 
 #ifdef TE_PLATFORM_WINDOWS
 	#include <Windows.h>

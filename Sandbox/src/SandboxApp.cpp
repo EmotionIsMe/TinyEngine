@@ -9,11 +9,20 @@ public:
 	}
 	
 	void OnUpdate() override {
-		TE_INFO("ExampleLayer::Update");
+		//TE_INFO("ExampleLayer::Update");
+		if (TinyEngine::Input::IsKeyPressed(TE_KEY_TAB))
+			TE_TRACE("tap key is pressed (polling)!");
 	}
 
 	void OnEvent(TinyEngine::Event& event) override {
-		TE_TRACE("{0}", event);
+
+		if (event.GetEventType() == TinyEngine::EventType::KeyPressed){
+
+			TinyEngine::KeyPressedEvent& e = (TinyEngine::KeyPressedEvent&)event;
+			if (e.GetKeyCode() == TE_KEY_TAB)
+				TE_TRACE("Tab key is pressed (event)!");
+			TE_TRACE("{0}", (char)e.GetKeyCode());
+		}
 	}
 };
 class Sandbox : public TinyEngine::Application

@@ -164,9 +164,11 @@
     <ClInclude Include="src\TinyEngine\Events\KeyEvent.h" />
     <ClInclude Include="src\TinyEngine\Events\MouseEvent.h" />
     <ClInclude Include="src\TinyEngine\Input.h" />
+    <ClInclude Include="src\TinyEngine\KeyCodes.h" />
     <ClInclude Include="src\TinyEngine\Layer.h" />
     <ClInclude Include="src\TinyEngine\LayerStack.h" />
     <ClInclude Include="src\TinyEngine\Log.h" />
+    <ClInclude Include="src\TinyEngine\MouseButtonCodes.h" />
     <ClInclude Include="src\TinyEngine\Window.h" />
     <ClInclude Include="src\TinyEngine\imGui\ImGuiLayer.h" />
     <ClInclude Include="src\tepch.h" />
