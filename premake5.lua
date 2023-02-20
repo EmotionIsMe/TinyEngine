@@ -16,6 +16,7 @@ IncludeDir = {}
 IncludeDir ["GLFW"] = "TinyEngine/vendor/GLFW/include" 
 IncludeDir ["Glad"] = "TinyEngine/vendor/GLAD/include" 
 IncludeDir ["ImGui"] = "TinyEngine/vendor/imgui" 
+IncludeDir["glm"] = "TinyEngine/vendor/glm"
 
 include "TinyEngine/vendor/GLFW"
 include "TinyEngine/vendor/Glad"
@@ -36,7 +37,9 @@ project "TinyEngine" --项目名称
     files--该项目的文件
     {
         "%{prj.name}/src/**.h",
-        "%{prj.name}/src/**.cpp"
+        "%{prj.name}/src/**.cpp",
+		"%{prj.name}/vendor/glm/glm/**.hpp",
+		"%{prj.name}/vendor/glm/glm/**.inl",
     }
 
     includedirs--附加包含目录
@@ -45,7 +48,8 @@ project "TinyEngine" --项目名称
         "%{prj.name}/vendor/spdlog/include",
 		"%{IncludeDir.GLFW}",
 		"%{IncludeDir.Glad}",
-		"%{IncludeDir.ImGui}"
+		"%{IncludeDir.ImGui}",
+		"%{IncludeDir.glm}"
     }
 	
 	links
@@ -111,7 +115,8 @@ project "Sandbox"
     includedirs
     {
         "TinyEngine/vendor/spdlog/include",
-        "TinyEngine/src"
+		"TinyEngine/src",
+		"%{IncludeDir.glm}"
     }
 
     links

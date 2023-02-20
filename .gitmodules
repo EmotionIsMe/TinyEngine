@@ -7,3 +7,6 @@
 [submodule "TinyEngine/vendor/imgui"]
 	path = TinyEngine/vendor/imgui
 	url = https://github.com/TheCherno/imgui.git
+[submodule "TinyEngine/vendor/glm"]
+	path = TinyEngine/vendor/glm
+	url = https://github.com/g-truc/glm.git
