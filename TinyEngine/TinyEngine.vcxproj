@@ -152,7 +152,6 @@
     </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClInclude Include="src\Platform\OpenGL\imGuiOpenGLRenderer.h" />
     <ClInclude Include="src\Platform\Windows\WindowsInput.h" />
     <ClInclude Include="src\Platform\Windows\WindowsWindow.h" />
     <ClInclude Include="src\TinyEngine.h" />
@@ -536,13 +535,13 @@
     <ClInclude Include="vendor\glm\glm\vector_relational.hpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="src\Platform\OpenGL\imGuiOpenGLRenderer.cpp" />
     <ClCompile Include="src\Platform\Windows\WindowsInput.cpp" />
     <ClCompile Include="src\Platform\Windows\WindowsWindow.cpp" />
     <ClCompile Include="src\TinyEngine\Application.cpp" />
     <ClCompile Include="src\TinyEngine\Layer.cpp" />
     <ClCompile Include="src\TinyEngine\LayerStack.cpp" />
     <ClCompile Include="src\TinyEngine\Log.cpp" />
+    <ClCompile Include="src\TinyEngine\imGui\ImGuiBuild.cpp" />
     <ClCompile Include="src\TinyEngine\imGui\ImGuiLayer.cpp" />
     <ClCompile Include="src\tepch.cpp">
       <PrecompiledHeader>Create</PrecompiledHeader>

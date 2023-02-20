@@ -9,6 +9,8 @@
 #include "TinyEngine/Events/Event.h"
 #include "TinyEngine/Events/ApplicationEvent.h"
 
+#include "TinyEngine/ImGui/ImGuiLayer.h"
+
 namespace TinyEngine {
 
 	class  TE_API  Application
@@ -28,6 +30,7 @@ namespace TinyEngine {
 	private:
 		bool OnWindowClose(WindowCloseEvent& e);
 		std::unique_ptr<Window> m_Window;
+		ImGuiLayer* m_ImGuiLayer;
 		bool m_Running = true;
 		LayerStack m_LayerStack;
 

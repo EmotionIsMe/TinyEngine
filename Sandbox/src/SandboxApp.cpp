@@ -1,5 +1,7 @@
 #include <TinyEngine.h>
 
+#include "imgui/imgui.h"
+
 class ExampleLayer : public TinyEngine::Layer {
 
 public:
@@ -12,6 +14,13 @@ public:
 		//TE_INFO("ExampleLayer::Update");
 		if (TinyEngine::Input::IsKeyPressed(TE_KEY_TAB))
 			TE_TRACE("tap key is pressed (polling)!");
+	}
+
+	virtual void OnImGuiRender() override
+	{
+		ImGui::Begin("Test");
+		ImGui::Text("Hello World");
+		ImGui::End();
 	}
 
 	void OnEvent(TinyEngine::Event& event) override {
@@ -29,8 +38,8 @@ class Sandbox : public TinyEngine::Application
 {
 public:
 	Sandbox() {
+
 		PushLayer(new ExampleLayer());
-		PushOverlay(new TinyEngine::ImGuiLayer());
 	}
 	~Sandbox() {
 

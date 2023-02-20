@@ -116,6 +116,7 @@ project "Sandbox"
     {
         "TinyEngine/vendor/spdlog/include",
 		"TinyEngine/src",
+		"TinyEngine/vendor",
 		"%{IncludeDir.glm}"
     }
 
