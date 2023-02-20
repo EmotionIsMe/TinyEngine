@@ -1,0 +1,9 @@
+[submodule "TinyEngine/vendor/spdlog"]
+	path = TinyEngine/vendor/spdlog
+	url = https://github.com/gabime/spdlog.git
+[submodule "TinyEngine/vendor/GLFW"]
+	path = TinyEngine/vendor/GLFW
+	url = https://github.com/TheCherno/glfw.git
+[submodule "TinyEngine/vendor/imgui"]
+	path = TinyEngine/vendor/imgui
+	url = https://github.com/TheCherno/imgui.git
