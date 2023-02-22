@@ -25,8 +25,10 @@ include "TinyEngine/vendor/imgui"
 
 project "TinyEngine" --项目名称
     location "TinyEngine" --相对路径
-    kind "SharedLib" --表明该项目是dll动态库
+    kind "StaticLib" --表明该项目是静态库
     language "c++"   --指定语言是c++
+	cppdialect "C++17"
+	staticruntime "on"
 
     targetdir ("bin/" .. outputdir .. "/%{prj.name}")--输出目录
     objdir ("bin-int/" .. outputdir .. "/%{prj.name}")--中间临时文件的目录
@@ -41,6 +43,11 @@ project "TinyEngine" --项目名称
 		"%{prj.name}/vendor/glm/glm/**.hpp",
 		"%{prj.name}/vendor/glm/glm/**.inl",
     }
+	
+	defines
+	{
+		"_CRT_SECURE_NO_WARNINGS"
+	}
 
     includedirs--附加包含目录
     {
@@ -61,8 +68,6 @@ project "TinyEngine" --项目名称
     }
 
     filter "system:windows"--windows平台的配置
-        cppdialect "c++17"
-        staticruntime "On"
         systemversion "latest"
 
         defines --预编译宏
@@ -70,38 +75,29 @@ project "TinyEngine" --项目名称
             "TE_BUILD_DLL",
             "TE_PLATFORM_WINDOWS",
 			"GLFW_INCLUDE_NONE",
-            "_WINDLL",
-            "_UNICODE",
-            "UNICODE",
-        }
-
-        postbuildcommands -- build后的自定义命令
-        {
-            ("{COPY} %{cfg.buildtarget.relpath} ../bin/" .. outputdir .. "/Sandbox") --拷贝引擎dll库到sanbox.exe的同一目录下去
         }
 
     filter "configurations:Debug"
         defines "TE_DEBUG"
         runtime "Debug"
-		buildoptions "/MDd"
         symbols "on"
 
     filter "configurations:Release"
         defines "TE_RELEASE"
         runtime "Release"
-		buildoptions "/MD"
         optimize "on"
 
     filter "configurations:Dist"
         defines "TE_DIST"
         runtime "Release"
-		buildoptions "/MD"
         optimize "on"
 
 project "Sandbox"
     location "Sandbox"
     kind "ConsoleApp"
     language "c++"
+	cppdialect "C++17"
+	staticruntime "on"
 
     targetdir ("bin/" .. outputdir .. "/%{prj.name}")
     objdir ("bin-int/" .. outputdir .. "/%{prj.name}")
@@ -126,8 +122,6 @@ project "Sandbox"
     }
 
     filter "system:windows"
-        cppdialect "c++17"
-        staticruntime "On"
         systemversion "latest"
 
         defines
@@ -140,17 +134,14 @@ project "Sandbox"
     filter "configurations:Debug"
         defines "TE_DEBUG"
         runtime "Debug"
-		buildoptions "/MDd"
         symbols "on"
 
     filter "configurations:Release"
         defines "TE_RELEASE"
         runtime "Release"
-		buildoptions "/MD"
         optimize "on"
 
     filter "configurations:Dist"
         defines "TE_DIST"
         runtime "Release"
-		buildoptions "/MD"
         optimize "on"

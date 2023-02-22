@@ -24,4 +24,3 @@ namespace TinyEngine {
 		unsigned int m_LayerInsertIndex = 0;
 	};
 }
-

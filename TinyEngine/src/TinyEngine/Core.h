@@ -1,11 +1,15 @@
 #pragma once
 
 #ifdef TE_PLATFORM_WINDOWS
+#if TE_DYNAMIC_LINK
 	#ifdef TE_BUILD_DLL
 		#define TE_API __declspec(dllexport)
 	#else
 		#define TE_API __declspec(dllimport)
 	#endif
+#else
+	#define TE_API
+#endif
 #else
 	#error  hazel only surpport windows!
 #endif
