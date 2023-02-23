@@ -18,6 +18,11 @@ namespace TinyEngine {
 		glfwMakeContextCurrent(m_WindowHandle);
 		int status = gladLoadGLLoader((GLADloadproc)glfwGetProcAddress);
 		TE_CORE_ASSERT(status, "Failed to initialize Glad!");
+
+		TE_CORE_INFO("OpenGL Info:");
+		TE_CORE_INFO("  Vendor: {0}", glGetString(GL_VENDOR));
+		TE_CORE_INFO("  Renderer: {0}", glGetString(GL_RENDERER));
+		TE_CORE_INFO("  Version: {0}", glGetString(GL_VERSION));
 	}
 
 	void OpenGLContext::SwapBuffers()

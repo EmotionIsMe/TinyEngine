@@ -27,6 +27,7 @@ namespace TinyEngine {
 
 		inline static Application& Get() { return *s_Instace; }
 		inline Window& GetWindow() { return  *m_Window; }
+
 	private:
 		bool OnWindowClose(WindowCloseEvent& e);
 		std::unique_ptr<Window> m_Window;
@@ -34,6 +35,10 @@ namespace TinyEngine {
 		bool m_Running = true;
 		LayerStack m_LayerStack;
 
+	private:
+		unsigned int m_VertexArray, m_VertexBuffer, m_IndexBuffer;
+
+	private:
 		static Application* s_Instace;
 	};
 	
