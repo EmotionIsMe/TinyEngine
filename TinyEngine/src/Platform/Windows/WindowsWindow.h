@@ -1,6 +1,7 @@
 #pragma once
 #include "tepch.h"
 #include "TinyEngine/Window.h"
+#include "TinyEngine/Renderer/GraphicsContext.h"
 
 #include "GLFW/glfw3.h"
 
@@ -28,6 +29,8 @@ namespace TinyEngine {
 		virtual void Shutdown();
 	private:
 		GLFWwindow* m_Window;
+		GraphicsContext* m_Context;
+
 		struct WindowData
 		{
 			std::string Title;
