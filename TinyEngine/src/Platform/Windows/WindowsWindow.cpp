@@ -6,7 +6,7 @@
 #include "TinyEngine/Events/KeyEvent.h"
 #include "TinyEngine/Events/MouseEvent.h"
 
-#include "glad/glad.h"
+#include "Platform/OpenGL/OpenGLContext.h"
 
 namespace TinyEngine {
 
@@ -52,9 +52,10 @@ namespace TinyEngine {
 		}
 
 		m_Window = glfwCreateWindow((int)props.Width, (int)props.Height, m_Data.Title.c_str(), nullptr, nullptr);
-		glfwMakeContextCurrent(m_Window);
-		int status = gladLoadGLLoader((GLADloadproc)glfwGetProcAddress);
-		TE_CORE_ASSERT(status, "Failed to initialize Glad");
+		
+		m_Context = new OpenGLContext(m_Window);
+		m_Context->Init();
+
 		glfwSetWindowUserPointer(m_Window, &m_Data);
 		SetVSync(true);
 
@@ -167,7 +168,7 @@ namespace TinyEngine {
 	{
 		// 窗口操作的时候会调用glfwPollEvents 并且对事件进行一个内部判断
 		glfwPollEvents();
-		glfwSwapBuffers(m_Window);
+		m_Context->SwapBuffers();
 	}
 
 	void WindowsWindow::SetVSync(bool enabled)
