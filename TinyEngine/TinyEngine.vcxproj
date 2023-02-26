@@ -158,6 +158,7 @@
     <ClInclude Include="src\TinyEngine\Log.h" />
     <ClInclude Include="src\TinyEngine\MouseButtonCodes.h" />
     <ClInclude Include="src\TinyEngine\Renderer\GraphicsContext.h" />
+    <ClInclude Include="src\TinyEngine\Renderer\Shader.h" />
     <ClInclude Include="src\TinyEngine\Window.h" />
     <ClInclude Include="src\TinyEngine\imGui\ImGuiLayer.h" />
     <ClInclude Include="src\tepch.h" />
@@ -537,6 +538,7 @@
     <ClCompile Include="src\tepch.cpp">
       <PrecompiledHeader>Create</PrecompiledHeader>
     </ClCompile>
+    <ClCompile Include="src\TinyEngine\Renderer\Shader.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="vendor\GLFW\GLFW.vcxproj">

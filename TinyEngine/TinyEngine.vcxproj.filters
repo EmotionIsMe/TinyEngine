@@ -1197,6 +1197,9 @@
     <ClInclude Include="src\TinyEngine\Renderer\GraphicsContext.h">
       <Filter>src\TinyEngine\Renderer</Filter>
     </ClInclude>
+    <ClInclude Include="src\TinyEngine\Renderer\Shader.h">
+      <Filter>src\TinyEngine\Renderer</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\Platform\Windows\WindowsInput.cpp">
@@ -1228,6 +1231,9 @@
     </ClCompile>
     <ClCompile Include="src\Platform\OpenGL\OpenGLContext.cpp">
       <Filter>src\Platform\OpenGL</Filter>
+    </ClCompile>
+    <ClCompile Include="src\TinyEngine\Renderer\Shader.cpp">
+      <Filter>src\TinyEngine\Renderer</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>
