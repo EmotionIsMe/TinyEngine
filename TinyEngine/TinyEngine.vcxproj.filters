@@ -1200,6 +1200,13 @@
     <ClInclude Include="src\TinyEngine\Renderer\Shader.h">
       <Filter>src\TinyEngine\Renderer</Filter>
     </ClInclude>
+    <ClInclude Include="src\TinyEngine\Renderer\Renderer.h">
+      <Filter>src\TinyEngine\Renderer</Filter>
+    </ClInclude>
+    <ClInclude Include="src\TinyEngine\Renderer\Buffer.h">
+      <Filter>src\TinyEngine\Renderer</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Platform\OpenGL\OpenGLBuffer.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\Platform\Windows\WindowsInput.cpp">
@@ -1235,5 +1242,12 @@
     <ClCompile Include="src\TinyEngine\Renderer\Shader.cpp">
       <Filter>src\TinyEngine\Renderer</Filter>
     </ClCompile>
+    <ClCompile Include="src\TinyEngine\Renderer\Renderer.cpp">
+      <Filter>src\TinyEngine\Renderer</Filter>
+    </ClCompile>
+    <ClCompile Include="src\TinyEngine\Renderer\Buffer.cpp">
+      <Filter>src\TinyEngine\Renderer</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Platform\OpenGL\OpenGLBuffer.cpp" />
   </ItemGroup>
 </Project>
