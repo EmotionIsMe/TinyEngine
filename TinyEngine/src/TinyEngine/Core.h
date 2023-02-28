@@ -11,7 +11,7 @@
 	#define TE_API
 #endif
 #else
-	#error  hazel only surpport windows!
+	#error  TinyEngine only surpport windows!
 #endif
 
 #ifdef TE_ENABLE_ASSERTS

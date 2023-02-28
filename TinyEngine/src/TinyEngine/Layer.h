@@ -2,6 +2,9 @@
 
 #include "TinyEngine/Core.h"
 #include "TinyEngine/Events/Event.h"
+
+#include "TinyEngine/Core/Timestep.h"
+
 namespace TinyEngine {
 	class TE_API Layer
 	{
@@ -11,7 +14,7 @@ namespace TinyEngine {
 		
 		virtual void  OnAttach() {}
 		virtual void  OnDetach() {}
-		virtual void  OnUpdate() {}
+		virtual void OnUpdate(Timestep ts) {}
 		virtual void  OnImGuiRender() {}
 		virtual void  OnEvent(Event& event) {}
 

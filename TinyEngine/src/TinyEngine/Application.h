@@ -9,16 +9,13 @@
 #include "TinyEngine/Events/Event.h"
 #include "TinyEngine/Events/ApplicationEvent.h"
 
-#include "TinyEngine/ImGui/ImGuiLayer.h"
+#include "TinyEngine/Core/Timestep.h"
 
-#include "TinyEngine/Renderer/Shader.h"
-#include "TinyEngine/Renderer/Buffer.h"
-#include "TinyEngine/Renderer/VertexArray.h"
-#include "TinyEngine/Renderer/OrthographicCamera.h"
+#include "TinyEngine/ImGui/ImGuiLayer.h"
 
 namespace TinyEngine {
 
-	class  TE_API  Application
+	class  Application
 	{
 	public:
 		Application();
@@ -35,19 +32,14 @@ namespace TinyEngine {
 
 	private:
 		bool OnWindowClose(WindowCloseEvent& e);
+
+	private:
 		std::unique_ptr<Window> m_Window;
 		ImGuiLayer* m_ImGuiLayer;
 		bool m_Running = true;
 		LayerStack m_LayerStack;
+		float m_LastFrameTime = 0.0f;
 
-	private:
-		std::shared_ptr<Shader> m_Shader;
-		std::shared_ptr<VertexArray> m_VertexArray;
-
-		std::shared_ptr<Shader> m_BlueShader;
-		std::shared_ptr<VertexArray> m_SquareVA;
-
-		OrthographicCamera m_Camera;
 	private:
 		static Application* s_Instace;
 	};

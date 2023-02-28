@@ -1213,6 +1213,7 @@
     <ClInclude Include="src\TinyEngine\Renderer\RendererAPI.h" />
     <ClInclude Include="src\Platform\OpenGL\OpenGLRendererAPI.h" />
     <ClInclude Include="src\TinyEngine\Renderer\OrthographicCamera.h" />
+    <ClInclude Include="src\TinyEngine\Core\Timestep.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\Platform\Windows\WindowsInput.cpp">

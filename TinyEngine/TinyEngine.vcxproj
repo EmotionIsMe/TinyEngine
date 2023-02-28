@@ -140,6 +140,7 @@
     </Lib>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClInclude Include="src\TinyEngine\Core\Timestep.h" />
     <ClInclude Include="src\TinyEngine\Renderer\OrthographicCamera.h" />
     <ClInclude Include="src\Platform\OpenGL\OpenGLRendererAPI.h" />
     <ClInclude Include="src\TinyEngine\Renderer\RendererAPI.h" />
