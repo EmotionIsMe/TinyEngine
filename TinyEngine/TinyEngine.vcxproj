@@ -140,6 +140,7 @@
     </Lib>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClInclude Include="src\Platform\OpenGL\OpenGLShader.h" />
     <ClInclude Include="src\TinyEngine\Core\Timestep.h" />
     <ClInclude Include="src\TinyEngine\Renderer\OrthographicCamera.h" />
     <ClInclude Include="src\Platform\OpenGL\OpenGLRendererAPI.h" />
@@ -536,6 +537,7 @@
     <ClInclude Include="src\TinyEngine\Renderer\VertexArray.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="src\Platform\OpenGL\OpenGLShader.cpp" />
     <ClCompile Include="src\TinyEngine\Renderer\OrthographicCamera.cpp" />
     <ClCompile Include="src\Platform\OpenGL\OpenGLRendererAPI.cpp" />
     <ClCompile Include="src\TinyEngine\Renderer\RendererAPI.cpp" />
