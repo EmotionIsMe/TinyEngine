@@ -119,21 +119,19 @@ public:
 
 		m_FlatColorShader.reset(TinyEngine::Shader::Create(flatColorShaderVertexSrc, flatColorShaderFragmentSrc));
 
+
 		std::string textureShaderVertexSrc = R"(
 			#version 330 core
 			
 			layout(location = 0) in vec3 a_Position;
 			layout(location = 1) in vec2 a_TexCoord;
-
 			uniform mat4 u_ViewProjection;
 			uniform mat4 u_Transform;
-
 			out vec2 v_TexCoord;
-
 			void main()
 			{
 				v_TexCoord = a_TexCoord;
-				gl_Position = u_ViewProjection * u_Transform * vec4(a_Position, 1.0);
+				gl_Position = u_ViewProjection * u_Transform * vec4(a_Position, 1.0);	
 			}
 		)";
 
@@ -141,18 +139,21 @@ public:
 			#version 330 core
 			
 			layout(location = 0) out vec4 color;
-
 			in vec2 v_TexCoord;
-
-			uniform vec3 u_Color;
-
+			
+			uniform sampler2D u_Texture;
 			void main()
 			{
-				color = vec4(v_TexCoord, 0.0, 1.0);
+				color = texture(u_Texture, v_TexCoord);
 			}
 		)";
 
 		m_TextureShader.reset(TinyEngine::Shader::Create(textureShaderVertexSrc, textureShaderFragmentSrc));
+
+		m_Texture = TinyEngine::Texture2D::Create("assets/textures/Checkerboard.png");
+
+		std::dynamic_pointer_cast<TinyEngine::OpenGLShader>(m_TextureShader)->Bind();
+		std::dynamic_pointer_cast<TinyEngine::OpenGLShader>(m_TextureShader)->UploadUniformInt("u_Texture", 0);
 	}
 	
 	void OnUpdate(TinyEngine::Timestep ts) override
@@ -195,6 +196,7 @@ public:
 			}
 		}
 
+		m_Texture->Bind();
 		TinyEngine::Renderer::Submit(m_TextureShader, m_SquareVA, glm::scale(glm::mat4(1.0f), glm::vec3(1.5f)));
 
 		// Triange
@@ -220,6 +222,8 @@ public:
 
 		TinyEngine::Ref<TinyEngine::Shader> m_FlatColorShader, m_TextureShader;
 		TinyEngine::Ref<TinyEngine::VertexArray> m_SquareVA;
+
+		TinyEngine::Ref<TinyEngine::Texture2D> m_Texture;
 
 		TinyEngine::OrthographicCamera m_Camera;
 		glm::vec3 m_CameraPosition;

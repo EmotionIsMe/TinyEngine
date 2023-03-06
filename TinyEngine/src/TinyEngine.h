@@ -19,6 +19,7 @@
 #include "TinyEngine/Renderer/Buffer.h"
 #include "TinyEngine/Renderer/Shader.h"
 #include "TinyEngine/Renderer/VertexArray.h"
+#include "TinyEngine/Renderer/Texture.h"
 
 #include "TinyEngine/Renderer/OrthographicCamera.h"
 // -----------------------------------

@@ -17,6 +17,7 @@ IncludeDir ["GLFW"] = "TinyEngine/vendor/GLFW/include"
 IncludeDir ["Glad"] = "TinyEngine/vendor/GLAD/include" 
 IncludeDir ["ImGui"] = "TinyEngine/vendor/imgui" 
 IncludeDir["glm"] = "TinyEngine/vendor/glm"
+IncludeDir["stb_image"] = "TinyEngine/vendor/stb_image"
 
 include "TinyEngine/vendor/GLFW"
 include "TinyEngine/vendor/Glad"
@@ -40,6 +41,8 @@ project "TinyEngine" --项目名称
     {
         "%{prj.name}/src/**.h",
         "%{prj.name}/src/**.cpp",
+		"%{prj.name}/vendor/stb_image/**.h",
+		"%{prj.name}/vendor/stb_image/**.cpp",
 		"%{prj.name}/vendor/glm/glm/**.hpp",
 		"%{prj.name}/vendor/glm/glm/**.inl",
     }
@@ -56,7 +59,8 @@ project "TinyEngine" --项目名称
 		"%{IncludeDir.GLFW}",
 		"%{IncludeDir.Glad}",
 		"%{IncludeDir.ImGui}",
-		"%{IncludeDir.glm}"
+		"%{IncludeDir.glm}",
+		"%{IncludeDir.stb_image}"
     }
 	
 	links
