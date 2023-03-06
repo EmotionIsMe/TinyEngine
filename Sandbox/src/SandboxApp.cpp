@@ -38,17 +38,18 @@ public:
 
 		m_SquareVA.reset(TinyEngine::VertexArray::Create());
 
-		float squareVertices[3 * 4] = {
-			-0.5f, -0.5f, 0.0f,
-			 0.5f, -0.5f, 0.0f,
-			 0.5f,  0.5f, 0.0f,
-			-0.5f,  0.5f, 0.0f
+		float squareVertices[5 * 4] = {
+			-0.5f, -0.5f, 0.0f, 0.0f, 0.0f,
+			 0.5f, -0.5f, 0.0f, 1.0f, 0.0f,
+			 0.5f,  0.5f, 0.0f, 1.0f, 1.0f,
+			-0.5f,  0.5f, 0.0f, 0.0f, 1.0f
 		};
 
 		TinyEngine::Ref<TinyEngine::VertexBuffer> squareVB;
 		squareVB.reset(TinyEngine::VertexBuffer::Create(squareVertices, sizeof(squareVertices)));
 		squareVB->SetLayout({
-			{ TinyEngine::ShaderDataType::Float3, "a_Position" }
+			{ TinyEngine::ShaderDataType::Float3, "a_Position" },
+			{ TinyEngine::ShaderDataType::Float2, "a_TexCood" }
 			});
 		m_SquareVA->AddVertexBuffer(squareVB);
 
@@ -117,6 +118,41 @@ public:
 		)";
 
 		m_FlatColorShader.reset(TinyEngine::Shader::Create(flatColorShaderVertexSrc, flatColorShaderFragmentSrc));
+
+		std::string textureShaderVertexSrc = R"(
+			#version 330 core
+			
+			layout(location = 0) in vec3 a_Position;
+			layout(location = 1) in vec2 a_TexCoord;
+
+			uniform mat4 u_ViewProjection;
+			uniform mat4 u_Transform;
+
+			out vec2 v_TexCoord;
+
+			void main()
+			{
+				v_TexCoord = a_TexCoord;
+				gl_Position = u_ViewProjection * u_Transform * vec4(a_Position, 1.0);
+			}
+		)";
+
+		std::string textureShaderFragmentSrc = R"(
+			#version 330 core
+			
+			layout(location = 0) out vec4 color;
+
+			in vec2 v_TexCoord;
+
+			uniform vec3 u_Color;
+
+			void main()
+			{
+				color = vec4(v_TexCoord, 0.0, 1.0);
+			}
+		)";
+
+		m_TextureShader.reset(TinyEngine::Shader::Create(textureShaderVertexSrc, textureShaderFragmentSrc));
 	}
 	
 	void OnUpdate(TinyEngine::Timestep ts) override
@@ -158,7 +194,11 @@ public:
 				TinyEngine::Renderer::Submit(m_FlatColorShader, m_SquareVA, transform);
 			}
 		}
-		TinyEngine::Renderer::Submit(m_Shader, m_VertexArray);
+
+		TinyEngine::Renderer::Submit(m_TextureShader, m_SquareVA, glm::scale(glm::mat4(1.0f), glm::vec3(1.5f)));
+
+		// Triange
+		// TinyEngine::Renderer::Submit(m_Shader, m_VertexArray);
 
 		TinyEngine::Renderer::EndScene();
 	}
@@ -178,7 +218,7 @@ public:
 		TinyEngine::Ref<TinyEngine::Shader> m_Shader;
 		TinyEngine::Ref<TinyEngine::VertexArray> m_VertexArray;
 
-		TinyEngine::Ref<TinyEngine::Shader> m_FlatColorShader;
+		TinyEngine::Ref<TinyEngine::Shader> m_FlatColorShader, m_TextureShader;
 		TinyEngine::Ref<TinyEngine::VertexArray> m_SquareVA;
 
 		TinyEngine::OrthographicCamera m_Camera;
