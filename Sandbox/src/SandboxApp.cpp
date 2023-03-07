@@ -88,7 +88,7 @@ public:
 			}
 		)";
 
-		m_Shader.reset(TinyEngine::Shader::Create(vertexSrc, fragmentSrc));
+		m_Shader = TinyEngine::Shader::Create("VertexPosColor", vertexSrc, fragmentSrc);
 
 		std::string flatColorShaderVertexSrc = R"(
 			#version 330 core
@@ -117,16 +117,16 @@ public:
 			}
 		)";
 
-		m_FlatColorShader.reset(TinyEngine::Shader::Create(flatColorShaderVertexSrc, flatColorShaderFragmentSrc));
+		m_FlatColorShader = TinyEngine::Shader::Create("FlatColor", flatColorShaderVertexSrc, flatColorShaderFragmentSrc);
 
 
-		m_TextureShader.reset(TinyEngine::Shader::Create("assets/shaders/Texture.glsl"));
+		auto textureShader = m_ShaderLibrary.Load("assets/shaders/Texture.glsl");
 
 		m_Texture = TinyEngine::Texture2D::Create("assets/textures/Checkerboard.png");
 		m_ChernoLogoTexture = TinyEngine::Texture2D::Create("assets/textures/ChernoLogo.png");
 
-		std::dynamic_pointer_cast<TinyEngine::OpenGLShader>(m_TextureShader)->Bind();
-		std::dynamic_pointer_cast<TinyEngine::OpenGLShader>(m_TextureShader)->UploadUniformInt("u_Texture", 0);
+		std::dynamic_pointer_cast<TinyEngine::OpenGLShader>(textureShader)->Bind();
+		std::dynamic_pointer_cast<TinyEngine::OpenGLShader>(textureShader)->UploadUniformInt("u_Texture", 0);
 	}
 	
 	void OnUpdate(TinyEngine::Timestep ts) override
@@ -168,12 +168,13 @@ public:
 				TinyEngine::Renderer::Submit(m_FlatColorShader, m_SquareVA, transform);
 			}
 		}
+		auto textureShader = m_ShaderLibrary.Get("Texture");
 
 		m_Texture->Bind();
-		TinyEngine::Renderer::Submit(m_TextureShader, m_SquareVA, glm::scale(glm::mat4(1.0f), glm::vec3(1.5f)));
+		TinyEngine::Renderer::Submit(textureShader, m_SquareVA, glm::scale(glm::mat4(1.0f), glm::vec3(1.5f)));
 
 		m_ChernoLogoTexture->Bind();
-		TinyEngine::Renderer::Submit(m_TextureShader, m_SquareVA, glm::scale(glm::mat4(1.0f), glm::vec3(1.5f)));
+		TinyEngine::Renderer::Submit(textureShader, m_SquareVA, glm::scale(glm::mat4(1.0f), glm::vec3(1.5f)));
 
 		// Triange
 		// TinyEngine::Renderer::Submit(m_Shader, m_VertexArray);
@@ -193,10 +194,11 @@ public:
 
 	}
 	private:
+		TinyEngine::ShaderLibrary m_ShaderLibrary;
 		TinyEngine::Ref<TinyEngine::Shader> m_Shader;
 		TinyEngine::Ref<TinyEngine::VertexArray> m_VertexArray;
 
-		TinyEngine::Ref<TinyEngine::Shader> m_FlatColorShader, m_TextureShader;
+		TinyEngine::Ref<TinyEngine::Shader> m_FlatColorShader;
 		TinyEngine::Ref<TinyEngine::VertexArray> m_SquareVA;
 
 		TinyEngine::Ref<TinyEngine::Texture2D> m_Texture, m_ChernoLogoTexture;

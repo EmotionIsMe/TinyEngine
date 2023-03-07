@@ -10,6 +10,7 @@
 #include <vector>
 #include <unordered_map>
 #include <unordered_set>
+#include <array>
 #include <stdio.h>
 /*    log        */
 #include "TinyEngine/Log.h"
