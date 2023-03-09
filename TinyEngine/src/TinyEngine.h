@@ -9,6 +9,7 @@
 #include "TinyEngine/Input.h"
 #include "TinyEngine/KeyCodes.h"
 #include "TinyEngine/MouseButtonCodes.h"
+#include "TinyEngine/OrthographicCameraController.h"
 
 #include "TinyEngine/imGui/ImGuiLayer.h"
 
