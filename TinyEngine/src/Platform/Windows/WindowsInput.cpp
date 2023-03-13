@@ -1,7 +1,7 @@
 #include "tepch.h"
 #include "WindowsInput.h"
 
-#include "TinyEngine/Application.h"
+#include "TinyEngine/Core/Application.h"
 #include <GLFW/glfw3.h>
 
 namespace TinyEngine {

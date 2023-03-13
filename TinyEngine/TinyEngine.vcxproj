@@ -140,7 +140,6 @@
     </Lib>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClInclude Include="src\TinyEngine\OrthographicCameraController.h" />
     <ClInclude Include="src\Platform\OpenGL\OpenGLBuffer.h" />
     <ClInclude Include="src\Platform\OpenGL\OpenGLContext.h" />
     <ClInclude Include="src\Platform\OpenGL\OpenGLRendererAPI.h" />
@@ -150,30 +149,31 @@
     <ClInclude Include="src\Platform\Windows\WindowsInput.h" />
     <ClInclude Include="src\Platform\Windows\WindowsWindow.h" />
     <ClInclude Include="src\TinyEngine.h" />
-    <ClInclude Include="src\TinyEngine\Application.h" />
-    <ClInclude Include="src\TinyEngine\Core.h" />
+    <ClInclude Include="src\TinyEngine\Core\Application.h" />
+    <ClInclude Include="src\TinyEngine\Core\Core.h" />
+    <ClInclude Include="src\TinyEngine\Core\EntryPoint.h" />
+    <ClInclude Include="src\TinyEngine\Core\Input.h" />
+    <ClInclude Include="src\TinyEngine\Core\KeyCodes.h" />
+    <ClInclude Include="src\TinyEngine\Core\Layer.h" />
+    <ClInclude Include="src\TinyEngine\Core\LayerStack.h" />
+    <ClInclude Include="src\TinyEngine\Core\Log.h" />
+    <ClInclude Include="src\TinyEngine\Core\MouseButtonCodes.h" />
     <ClInclude Include="src\TinyEngine\Core\Timestep.h" />
-    <ClInclude Include="src\TinyEngine\EntryPoint.h" />
+    <ClInclude Include="src\TinyEngine\Core\Window.h" />
     <ClInclude Include="src\TinyEngine\Events\ApplicationEvent.h" />
     <ClInclude Include="src\TinyEngine\Events\Event.h" />
     <ClInclude Include="src\TinyEngine\Events\KeyEvent.h" />
     <ClInclude Include="src\TinyEngine\Events\MouseEvent.h" />
-    <ClInclude Include="src\TinyEngine\Input.h" />
-    <ClInclude Include="src\TinyEngine\KeyCodes.h" />
-    <ClInclude Include="src\TinyEngine\Layer.h" />
-    <ClInclude Include="src\TinyEngine\LayerStack.h" />
-    <ClInclude Include="src\TinyEngine\Log.h" />
-    <ClInclude Include="src\TinyEngine\MouseButtonCodes.h" />
     <ClInclude Include="src\TinyEngine\Renderer\Buffer.h" />
     <ClInclude Include="src\TinyEngine\Renderer\GraphicsContext.h" />
     <ClInclude Include="src\TinyEngine\Renderer\OrthographicCamera.h" />
+    <ClInclude Include="src\TinyEngine\Renderer\OrthographicCameraController.h" />
     <ClInclude Include="src\TinyEngine\Renderer\RenderCommand.h" />
     <ClInclude Include="src\TinyEngine\Renderer\Renderer.h" />
     <ClInclude Include="src\TinyEngine\Renderer\RendererAPI.h" />
     <ClInclude Include="src\TinyEngine\Renderer\Shader.h" />
     <ClInclude Include="src\TinyEngine\Renderer\Texture.h" />
     <ClInclude Include="src\TinyEngine\Renderer\VertexArray.h" />
-    <ClInclude Include="src\TinyEngine\Window.h" />
     <ClInclude Include="src\TinyEngine\imGui\ImGuiLayer.h" />
     <ClInclude Include="src\tepch.h" />
     <ClInclude Include="vendor\glm\glm\common.hpp" />
@@ -541,7 +541,6 @@
     <ClInclude Include="vendor\stb_image\stb_image.h" />
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="src\TinyEngine\OrthographicCameraController.cpp" />
     <ClCompile Include="src\Platform\OpenGL\OpenGLBuffer.cpp" />
     <ClCompile Include="src\Platform\OpenGL\OpenGLContext.cpp" />
     <ClCompile Include="src\Platform\OpenGL\OpenGLRendererAPI.cpp" />
@@ -550,12 +549,13 @@
     <ClCompile Include="src\Platform\OpenGL\OpenGLVertexArray.cpp" />
     <ClCompile Include="src\Platform\Windows\WindowsInput.cpp" />
     <ClCompile Include="src\Platform\Windows\WindowsWindow.cpp" />
-    <ClCompile Include="src\TinyEngine\Application.cpp" />
-    <ClCompile Include="src\TinyEngine\Layer.cpp" />
-    <ClCompile Include="src\TinyEngine\LayerStack.cpp" />
-    <ClCompile Include="src\TinyEngine\Log.cpp" />
+    <ClCompile Include="src\TinyEngine\Core\Application.cpp" />
+    <ClCompile Include="src\TinyEngine\Core\Layer.cpp" />
+    <ClCompile Include="src\TinyEngine\Core\LayerStack.cpp" />
+    <ClCompile Include="src\TinyEngine\Core\Log.cpp" />
     <ClCompile Include="src\TinyEngine\Renderer\Buffer.cpp" />
     <ClCompile Include="src\TinyEngine\Renderer\OrthographicCamera.cpp" />
+    <ClCompile Include="src\TinyEngine\Renderer\OrthographicCameraController.cpp" />
     <ClCompile Include="src\TinyEngine\Renderer\RenderCommand.cpp" />
     <ClCompile Include="src\TinyEngine\Renderer\Renderer.cpp" />
     <ClCompile Include="src\TinyEngine\Renderer\RendererAPI.cpp" />

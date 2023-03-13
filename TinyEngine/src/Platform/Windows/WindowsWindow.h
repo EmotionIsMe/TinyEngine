@@ -1,6 +1,6 @@
 #pragma once
 #include "tepch.h"
-#include "TinyEngine/Window.h"
+#include "TinyEngine/Core/Window.h"
 #include "TinyEngine/Renderer/GraphicsContext.h"
 
 #include "GLFW/glfw3.h"

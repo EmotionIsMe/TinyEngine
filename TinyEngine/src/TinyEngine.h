@@ -1,15 +1,15 @@
 #pragma once
 #include "tepch.h"
-#include "TinyEngine/Core.h"
-#include "TinyEngine/Application.h"
-#include "TinyEngine/Layer.h"
+#include "TinyEngine/Core/Core.h"
+#include "TinyEngine/Core/Application.h"
+#include "TinyEngine/Core/Layer.h"
 
 #include "TinyEngine/Core/Timestep.h"
 
-#include "TinyEngine/Input.h"
-#include "TinyEngine/KeyCodes.h"
-#include "TinyEngine/MouseButtonCodes.h"
-#include "TinyEngine/OrthographicCameraController.h"
+#include "TinyEngine/Core/Input.h"
+#include "TinyEngine/Core/KeyCodes.h"
+#include "TinyEngine/Core/MouseButtonCodes.h"
+#include "TinyEngine/Renderer/OrthographicCameraController.h"
 
 #include "TinyEngine/imGui/ImGuiLayer.h"
 
@@ -26,5 +26,5 @@
 // -----------------------------------
 
 /* entry point */
-#include "TinyEngine/EntryPoint.h"
+#include "TinyEngine/Core/EntryPoint.h"
 

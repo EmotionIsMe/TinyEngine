@@ -1,8 +1,8 @@
 #include "tepch.h"
 #include "OrthographicCameraController.h"
 
-#include "TinyEngine/Input.h"
-#include "TinyEngine/KeyCodes.h"
+#include "TinyEngine/Core/Input.h"
+#include "TinyEngine/Core/KeyCodes.h"
 
 
 namespace TinyEngine {

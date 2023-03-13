@@ -2,7 +2,7 @@
 
 #include "tepch.h"
 
-#include "TinyEngine/Core.h"
+#include "TinyEngine/Core/Core.h"
 #include "TinyEngine/Events/Event.h"
 
 namespace TinyEngine {

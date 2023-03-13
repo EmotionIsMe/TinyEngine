@@ -1,5 +1,5 @@
 #include "tepch.h"
-#include "TinyEngine/Core.h"
+#include "TinyEngine/Core/Core.h"
 #include "WindowsWindow.h"
 
 #include "TinyEngine/Events/ApplicationEvent.h"

@@ -13,7 +13,7 @@
 #include <array>
 #include <stdio.h>
 /*    log        */
-#include "TinyEngine/Log.h"
+#include "TinyEngine/Core/Log.h"
 
 
 #ifdef TE_PLATFORM_WINDOWS

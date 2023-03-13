@@ -1,7 +1,7 @@
 #pragma once
 
 #include "tepch.h"
-#include "TinyEngine/Core.h"
+#include "TinyEngine/Core/Core.h"
 
 namespace TinyEngine {
 	

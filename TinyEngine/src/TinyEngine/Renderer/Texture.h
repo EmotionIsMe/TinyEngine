@@ -2,7 +2,7 @@
 
 #include <string>
 
-#include "TinyEngine/Core.h"
+#include "TinyEngine/Core/Core.h"
 
 namespace TinyEngine {
 

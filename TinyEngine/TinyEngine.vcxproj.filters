@@ -81,17 +81,38 @@
     <ClInclude Include="src\TinyEngine.h">
       <Filter>src</Filter>
     </ClInclude>
-    <ClInclude Include="src\TinyEngine\Application.h">
-      <Filter>src\TinyEngine</Filter>
+    <ClInclude Include="src\TinyEngine\Core\Application.h">
+      <Filter>src\TinyEngine\Core</Filter>
     </ClInclude>
-    <ClInclude Include="src\TinyEngine\Core.h">
-      <Filter>src\TinyEngine</Filter>
+    <ClInclude Include="src\TinyEngine\Core\Core.h">
+      <Filter>src\TinyEngine\Core</Filter>
+    </ClInclude>
+    <ClInclude Include="src\TinyEngine\Core\EntryPoint.h">
+      <Filter>src\TinyEngine\Core</Filter>
+    </ClInclude>
+    <ClInclude Include="src\TinyEngine\Core\Input.h">
+      <Filter>src\TinyEngine\Core</Filter>
+    </ClInclude>
+    <ClInclude Include="src\TinyEngine\Core\KeyCodes.h">
+      <Filter>src\TinyEngine\Core</Filter>
+    </ClInclude>
+    <ClInclude Include="src\TinyEngine\Core\Layer.h">
+      <Filter>src\TinyEngine\Core</Filter>
+    </ClInclude>
+    <ClInclude Include="src\TinyEngine\Core\LayerStack.h">
+      <Filter>src\TinyEngine\Core</Filter>
+    </ClInclude>
+    <ClInclude Include="src\TinyEngine\Core\Log.h">
+      <Filter>src\TinyEngine\Core</Filter>
+    </ClInclude>
+    <ClInclude Include="src\TinyEngine\Core\MouseButtonCodes.h">
+      <Filter>src\TinyEngine\Core</Filter>
     </ClInclude>
     <ClInclude Include="src\TinyEngine\Core\Timestep.h">
       <Filter>src\TinyEngine\Core</Filter>
     </ClInclude>
-    <ClInclude Include="src\TinyEngine\EntryPoint.h">
-      <Filter>src\TinyEngine</Filter>
+    <ClInclude Include="src\TinyEngine\Core\Window.h">
+      <Filter>src\TinyEngine\Core</Filter>
     </ClInclude>
     <ClInclude Include="src\TinyEngine\Events\ApplicationEvent.h">
       <Filter>src\TinyEngine\Events</Filter>
@@ -105,24 +126,6 @@
     <ClInclude Include="src\TinyEngine\Events\MouseEvent.h">
       <Filter>src\TinyEngine\Events</Filter>
     </ClInclude>
-    <ClInclude Include="src\TinyEngine\Input.h">
-      <Filter>src\TinyEngine</Filter>
-    </ClInclude>
-    <ClInclude Include="src\TinyEngine\KeyCodes.h">
-      <Filter>src\TinyEngine</Filter>
-    </ClInclude>
-    <ClInclude Include="src\TinyEngine\Layer.h">
-      <Filter>src\TinyEngine</Filter>
-    </ClInclude>
-    <ClInclude Include="src\TinyEngine\LayerStack.h">
-      <Filter>src\TinyEngine</Filter>
-    </ClInclude>
-    <ClInclude Include="src\TinyEngine\Log.h">
-      <Filter>src\TinyEngine</Filter>
-    </ClInclude>
-    <ClInclude Include="src\TinyEngine\MouseButtonCodes.h">
-      <Filter>src\TinyEngine</Filter>
-    </ClInclude>
     <ClInclude Include="src\TinyEngine\Renderer\Buffer.h">
       <Filter>src\TinyEngine\Renderer</Filter>
     </ClInclude>
@@ -130,6 +133,9 @@
       <Filter>src\TinyEngine\Renderer</Filter>
     </ClInclude>
     <ClInclude Include="src\TinyEngine\Renderer\OrthographicCamera.h">
+      <Filter>src\TinyEngine\Renderer</Filter>
+    </ClInclude>
+    <ClInclude Include="src\TinyEngine\Renderer\OrthographicCameraController.h">
       <Filter>src\TinyEngine\Renderer</Filter>
     </ClInclude>
     <ClInclude Include="src\TinyEngine\Renderer\RenderCommand.h">
@@ -149,9 +155,6 @@
     </ClInclude>
     <ClInclude Include="src\TinyEngine\Renderer\VertexArray.h">
       <Filter>src\TinyEngine\Renderer</Filter>
-    </ClInclude>
-    <ClInclude Include="src\TinyEngine\Window.h">
-      <Filter>src\TinyEngine</Filter>
     </ClInclude>
     <ClInclude Include="src\TinyEngine\imGui\ImGuiLayer.h">
       <Filter>src\TinyEngine\imGui</Filter>
@@ -1248,7 +1251,6 @@
     <ClInclude Include="vendor\stb_image\stb_image.h">
       <Filter>vendor\stb_image</Filter>
     </ClInclude>
-    <ClInclude Include="src\TinyEngine\OrthographicCameraController.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\Platform\OpenGL\OpenGLBuffer.cpp">
@@ -1275,22 +1277,25 @@
     <ClCompile Include="src\Platform\Windows\WindowsWindow.cpp">
       <Filter>src\Platform\Windows</Filter>
     </ClCompile>
-    <ClCompile Include="src\TinyEngine\Application.cpp">
-      <Filter>src\TinyEngine</Filter>
+    <ClCompile Include="src\TinyEngine\Core\Application.cpp">
+      <Filter>src\TinyEngine\Core</Filter>
     </ClCompile>
-    <ClCompile Include="src\TinyEngine\Layer.cpp">
-      <Filter>src\TinyEngine</Filter>
+    <ClCompile Include="src\TinyEngine\Core\Layer.cpp">
+      <Filter>src\TinyEngine\Core</Filter>
     </ClCompile>
-    <ClCompile Include="src\TinyEngine\LayerStack.cpp">
-      <Filter>src\TinyEngine</Filter>
+    <ClCompile Include="src\TinyEngine\Core\LayerStack.cpp">
+      <Filter>src\TinyEngine\Core</Filter>
     </ClCompile>
-    <ClCompile Include="src\TinyEngine\Log.cpp">
-      <Filter>src\TinyEngine</Filter>
+    <ClCompile Include="src\TinyEngine\Core\Log.cpp">
+      <Filter>src\TinyEngine\Core</Filter>
     </ClCompile>
     <ClCompile Include="src\TinyEngine\Renderer\Buffer.cpp">
       <Filter>src\TinyEngine\Renderer</Filter>
     </ClCompile>
     <ClCompile Include="src\TinyEngine\Renderer\OrthographicCamera.cpp">
+      <Filter>src\TinyEngine\Renderer</Filter>
+    </ClCompile>
+    <ClCompile Include="src\TinyEngine\Renderer\OrthographicCameraController.cpp">
       <Filter>src\TinyEngine\Renderer</Filter>
     </ClCompile>
     <ClCompile Include="src\TinyEngine\Renderer\RenderCommand.cpp">
@@ -1323,6 +1328,5 @@
     <ClCompile Include="vendor\stb_image\stb_image.cpp">
       <Filter>vendor\stb_image</Filter>
     </ClCompile>
-    <ClCompile Include="src\TinyEngine\OrthographicCameraController.cpp" />
   </ItemGroup>
 </Project>

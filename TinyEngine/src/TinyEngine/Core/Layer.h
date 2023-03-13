@@ -1,6 +1,6 @@
 #pragma once
 
-#include "TinyEngine/Core.h"
+#include "TinyEngine/Core/Core.h"
 #include "TinyEngine/Events/Event.h"
 
 #include "TinyEngine/Core/Timestep.h"

@@ -1,6 +1,6 @@
 #pragma once
 
-#include "TinyEngine/Input.h"
+#include "TinyEngine/Core/Input.h"
 
 namespace TinyEngine {
 
