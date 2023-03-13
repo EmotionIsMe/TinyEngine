@@ -25,6 +25,4 @@
 #include "TinyEngine/Renderer/OrthographicCamera.h"
 // -----------------------------------
 
-/* entry point */
-#include "TinyEngine/Core/EntryPoint.h"
 
