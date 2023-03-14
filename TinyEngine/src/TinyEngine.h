@@ -15,6 +15,7 @@
 
 // ---Renderer------------------------
 #include "TinyEngine/Renderer/Renderer.h"
+#include "TinyEngine/Renderer/Renderer2D.h"
 #include "TinyEngine/Renderer/RenderCommand.h"
 
 #include "TinyEngine/Renderer/Buffer.h"
