@@ -20,6 +20,7 @@ private:
 	// Temp
 	TinyEngine::Ref<TinyEngine::VertexArray> m_SquareVA;
 	TinyEngine::Ref<TinyEngine::Shader> m_FlatColorShader;
+	TinyEngine::Ref<TinyEngine::Texture2D> m_CheckerboardTexture;
 
 	glm::vec4 m_SquareColor = { 0.2f, 0.3f, 0.8f, 1.0f };
 };
