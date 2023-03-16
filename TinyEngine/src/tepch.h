@@ -15,6 +15,8 @@
 /*    log        */
 #include "TinyEngine/Core/Log.h"
 
+#include "TinyEngine/Debug/Instrumentor.h"
+
 
 #ifdef TE_PLATFORM_WINDOWS
 	#include <Windows.h>

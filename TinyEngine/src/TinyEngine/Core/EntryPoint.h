@@ -10,12 +10,17 @@ int main() {
 
 	TinyEngine::Log::Init();
 
-	TE_CORE_WARN("Initiallized Log!");
-	TE_INFO("APP hello");
-
+	TE_PROFILE_BEGIN_SESSION("Startup", "TinyEngineProfile-Startup.json");
 	auto app = TinyEngine::CreateApplication();
+	TE_PROFILE_END_SESSION();
+
+	TE_PROFILE_BEGIN_SESSION("Runtime", "TinyEngineProfile-Runtime.json");
 	app->Run();
-	delete  app;
+	TE_PROFILE_END_SESSION();
+
+	TE_PROFILE_BEGIN_SESSION("Startup", "TinyEngineProfile-Shutdown.json");
+	delete app;
+	TE_PROFILE_END_SESSION();
 
 }
 #endif
