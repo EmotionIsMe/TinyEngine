@@ -19,6 +19,8 @@ namespace TinyEngine {
 
 	WindowsWindow::WindowsWindow(const WindowProps& props)
 	{
+		TE_PROFILE_FUNCTION();
+
 		Init(props);
 	}
 
@@ -31,11 +33,15 @@ namespace TinyEngine {
 
 	WindowsWindow::~WindowsWindow()
 	{
+		TE_PROFILE_FUNCTION();
+
 		Shutdown();
 	}
 
 	void WindowsWindow::Init(const WindowProps& props)
 	{
+		TE_PROFILE_FUNCTION();
+
 		m_Data.Title = props.Title;
 		m_Data.Width = props.Width;
 		m_Data.Height = props.Height;
@@ -44,6 +50,8 @@ namespace TinyEngine {
 
 		if (!s_GLFWInitialized)
 		{
+			TE_PROFILE_SCOPE("glfwInit");
+
 			// TODO: glfwTerminate on system shutdown
 			int success = glfwInit();
 			TE_CORE_ASSERT(success, "Could not intialize GLFW!");
@@ -51,7 +59,10 @@ namespace TinyEngine {
 			s_GLFWInitialized = true;
 		}
 
-		m_Window = glfwCreateWindow((int)props.Width, (int)props.Height, m_Data.Title.c_str(), nullptr, nullptr);
+		{
+			TE_PROFILE_SCOPE("glfwCreateWindow");
+			m_Window = glfwCreateWindow((int)props.Width, (int)props.Height, m_Data.Title.c_str(), nullptr, nullptr);
+		}
 		
 		m_Context = new OpenGLContext(m_Window);
 		m_Context->Init();
@@ -161,11 +172,15 @@ namespace TinyEngine {
 
 	void WindowsWindow::Shutdown()
 	{
+		TE_PROFILE_FUNCTION();
+
 		glfwDestroyWindow(m_Window);
 	}
 
 	void WindowsWindow::OnUpdate()
 	{
+		TE_PROFILE_FUNCTION();
+
 		// 窗口操作的时候会调用glfwPollEvents 并且对事件进行一个内部判断
 		glfwPollEvents();
 		m_Context->SwapBuffers();
@@ -173,6 +188,8 @@ namespace TinyEngine {
 
 	void WindowsWindow::SetVSync(bool enabled)
 	{
+		TE_PROFILE_FUNCTION();
+
 		if (enabled)
 			glfwSwapInterval(1);
 		else

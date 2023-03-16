@@ -11,11 +11,14 @@ Sandbox2D::Sandbox2D()
 
 void Sandbox2D::OnAttach()
 {
+	TE_PROFILE_FUNCTION();
+
 	m_CheckerboardTexture = TinyEngine::Texture2D::Create("assets/textures/Checkerboard.png");
 }
 
 void Sandbox2D::OnDetach()
 {
+	TE_PROFILE_FUNCTION();
 }
 
 void Sandbox2D::OnUpdate(TinyEngine::Timestep ts)
@@ -24,10 +27,7 @@ void Sandbox2D::OnUpdate(TinyEngine::Timestep ts)
 	TE_PROFILE_FUNCTION();
 
 	// Update
-	{
-		TE_PROFILE_SCOPE("CameraController::OnUpdate");
-		m_CameraController.OnUpdate(ts);
-	}
+	m_CameraController.OnUpdate(ts);
 
 	// Render
 	{
