@@ -25,8 +25,7 @@ public:
 			 0.0f,  0.5f, 0.0f, 0.8f, 0.8f, 0.2f, 1.0f
 		};
 
-		TinyEngine::Ref<TinyEngine::VertexBuffer> vertexBuffer;
-		vertexBuffer.reset(TinyEngine::VertexBuffer::Create(vertices, sizeof(vertices)));
+		TinyEngine::Ref<TinyEngine::VertexBuffer> vertexBuffer = TinyEngine::VertexBuffer::Create(vertices, sizeof(vertices));
 		TinyEngine::BufferLayout layout = {
 			{ TinyEngine::ShaderDataType::Float3, "a_Position" },
 			{ TinyEngine::ShaderDataType::Float4, "a_Color" }
@@ -35,8 +34,7 @@ public:
 		m_VertexArray->AddVertexBuffer(vertexBuffer);
 
 		uint32_t indices[3] = { 0, 1, 2 };
-		TinyEngine::Ref<TinyEngine::IndexBuffer> indexBuffer;
-		indexBuffer.reset(TinyEngine::IndexBuffer::Create(indices, sizeof(indices) / sizeof(uint32_t)));
+		TinyEngine::Ref<TinyEngine::IndexBuffer> indexBuffer = TinyEngine::IndexBuffer::Create(indices, sizeof(indices) / sizeof(uint32_t));
 		m_VertexArray->SetIndexBuffer(indexBuffer);
 
 		m_SquareVA = TinyEngine::VertexArray::Create();
@@ -48,8 +46,7 @@ public:
 			-0.5f,  0.5f, 0.0f, 0.0f, 1.0f
 		};
 
-		TinyEngine::Ref<TinyEngine::VertexBuffer> squareVB;
-		squareVB.reset(TinyEngine::VertexBuffer::Create(squareVertices, sizeof(squareVertices)));
+		TinyEngine::Ref<TinyEngine::VertexBuffer> squareVB = TinyEngine::VertexBuffer::Create(squareVertices, sizeof(squareVertices));
 		squareVB->SetLayout({
 			{ TinyEngine::ShaderDataType::Float3, "a_Position" },
 			{ TinyEngine::ShaderDataType::Float2, "a_TexCood" }
@@ -57,8 +54,7 @@ public:
 		m_SquareVA->AddVertexBuffer(squareVB);
 
 		uint32_t squareIndices[6] = { 0, 1, 2, 2, 3, 0 };
-		TinyEngine::Ref<TinyEngine::IndexBuffer> squareIB;
-		squareIB.reset(TinyEngine::IndexBuffer::Create(squareIndices, sizeof(squareIndices) / sizeof(uint32_t)));
+		TinyEngine::Ref<TinyEngine::IndexBuffer> squareIB = TinyEngine::IndexBuffer::Create(squareIndices, sizeof(squareIndices) / sizeof(uint32_t));
 		m_SquareVA->SetIndexBuffer(squareIB);
 
 		std::string vertexSrc = R"(
