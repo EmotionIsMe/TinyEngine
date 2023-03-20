@@ -122,7 +122,7 @@ namespace TinyEngine {
 	};
 }
 
-#define TE_PROFILE 1
+#define TE_PROFILE 0
 #if TE_PROFILE
 	#define TE_PROFILE_BEGIN_SESSION(name, filepath) ::TinyEngine::Instrumentor::Get().BeginSession(name, filepath)
 	#define TE_PROFILE_END_SESSION() ::TinyEngine::Instrumentor::Get().EndSession()
