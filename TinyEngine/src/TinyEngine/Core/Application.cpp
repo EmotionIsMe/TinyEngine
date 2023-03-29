@@ -53,6 +53,11 @@ namespace TinyEngine {
 		overlay->OnAttach();
 	}
 
+	void Application::Close()
+	{
+		m_Running = false;
+	}
+
 	void Application::onEvent(Event& e) 
 	{
 		TE_PROFILE_FUNCTION();

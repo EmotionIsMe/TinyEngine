@@ -27,6 +27,8 @@ namespace TinyEngine {
 		void PushLayer(Layer* layer);
 		void PushOverlay(Layer* overlay);
 
+		void Close();
+
 		inline static Application& Get() { return *s_Instace; }
 		inline Window& GetWindow() { return  *m_Window; }
 
