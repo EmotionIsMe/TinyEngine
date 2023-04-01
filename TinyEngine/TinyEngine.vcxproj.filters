@@ -19,6 +19,9 @@
     <Filter Include="src\TinyEngine\Core">
       <UniqueIdentifier>{4E7D6348-BADE-4056-434C-8708AFAC7715}</UniqueIdentifier>
     </Filter>
+    <Filter Include="src\TinyEngine\Debug">
+      <UniqueIdentifier>{2C82DF54-1811-691E-C12F-7D19AD9D79C4}</UniqueIdentifier>
+    </Filter>
     <Filter Include="src\TinyEngine\Events">
       <UniqueIdentifier>{5A1A5AF4-C686-15EF-8F7A-AD4CFBA53757}</UniqueIdentifier>
     </Filter>
@@ -58,6 +61,9 @@
       <Filter>src\Platform\OpenGL</Filter>
     </ClInclude>
     <ClInclude Include="src\Platform\OpenGL\OpenGLContext.h">
+      <Filter>src\Platform\OpenGL</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Platform\OpenGL\OpenGLFramebuffer.h">
       <Filter>src\Platform\OpenGL</Filter>
     </ClInclude>
     <ClInclude Include="src\Platform\OpenGL\OpenGLRendererAPI.h">
@@ -114,6 +120,9 @@
     <ClInclude Include="src\TinyEngine\Core\Window.h">
       <Filter>src\TinyEngine\Core</Filter>
     </ClInclude>
+    <ClInclude Include="src\TinyEngine\Debug\Instrumentor.h">
+      <Filter>src\TinyEngine\Debug</Filter>
+    </ClInclude>
     <ClInclude Include="src\TinyEngine\Events\ApplicationEvent.h">
       <Filter>src\TinyEngine\Events</Filter>
     </ClInclude>
@@ -129,6 +138,9 @@
     <ClInclude Include="src\TinyEngine\Renderer\Buffer.h">
       <Filter>src\TinyEngine\Renderer</Filter>
     </ClInclude>
+    <ClInclude Include="src\TinyEngine\Renderer\Framebuffer.h">
+      <Filter>src\TinyEngine\Renderer</Filter>
+    </ClInclude>
     <ClInclude Include="src\TinyEngine\Renderer\GraphicsContext.h">
       <Filter>src\TinyEngine\Renderer</Filter>
     </ClInclude>
@@ -142,6 +154,9 @@
       <Filter>src\TinyEngine\Renderer</Filter>
     </ClInclude>
     <ClInclude Include="src\TinyEngine\Renderer\Renderer.h">
+      <Filter>src\TinyEngine\Renderer</Filter>
+    </ClInclude>
+    <ClInclude Include="src\TinyEngine\Renderer\Renderer2D.h">
       <Filter>src\TinyEngine\Renderer</Filter>
     </ClInclude>
     <ClInclude Include="src\TinyEngine\Renderer\RendererAPI.h">
@@ -1251,16 +1266,15 @@
     <ClInclude Include="vendor\stb_image\stb_image.h">
       <Filter>vendor\stb_image</Filter>
     </ClInclude>
-    <ClInclude Include="src\TinyEngine\Renderer\Renderer2D.h" />
-    <ClInclude Include="src\TinyEngine\Debug\Instrumentor.h" />
-    <ClInclude Include="src\TinyEngine\Renderer\Framebuffer.h" />
-    <ClInclude Include="src\Platform\OpenGL\OpenGLFramebuffer.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\Platform\OpenGL\OpenGLBuffer.cpp">
       <Filter>src\Platform\OpenGL</Filter>
     </ClCompile>
     <ClCompile Include="src\Platform\OpenGL\OpenGLContext.cpp">
+      <Filter>src\Platform\OpenGL</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Platform\OpenGL\OpenGLFramebuffer.cpp">
       <Filter>src\Platform\OpenGL</Filter>
     </ClCompile>
     <ClCompile Include="src\Platform\OpenGL\OpenGLRendererAPI.cpp">
@@ -1293,7 +1307,13 @@
     <ClCompile Include="src\TinyEngine\Core\Log.cpp">
       <Filter>src\TinyEngine\Core</Filter>
     </ClCompile>
+    <ClCompile Include="src\TinyEngine\Core\Window.cpp">
+      <Filter>src\TinyEngine\Core</Filter>
+    </ClCompile>
     <ClCompile Include="src\TinyEngine\Renderer\Buffer.cpp">
+      <Filter>src\TinyEngine\Renderer</Filter>
+    </ClCompile>
+    <ClCompile Include="src\TinyEngine\Renderer\Framebuffer.cpp">
       <Filter>src\TinyEngine\Renderer</Filter>
     </ClCompile>
     <ClCompile Include="src\TinyEngine\Renderer\OrthographicCamera.cpp">
@@ -1306,6 +1326,9 @@
       <Filter>src\TinyEngine\Renderer</Filter>
     </ClCompile>
     <ClCompile Include="src\TinyEngine\Renderer\Renderer.cpp">
+      <Filter>src\TinyEngine\Renderer</Filter>
+    </ClCompile>
+    <ClCompile Include="src\TinyEngine\Renderer\Renderer2D.cpp">
       <Filter>src\TinyEngine\Renderer</Filter>
     </ClCompile>
     <ClCompile Include="src\TinyEngine\Renderer\RendererAPI.cpp">
@@ -1332,8 +1355,5 @@
     <ClCompile Include="vendor\stb_image\stb_image.cpp">
       <Filter>vendor\stb_image</Filter>
     </ClCompile>
-    <ClCompile Include="src\TinyEngine\Renderer\Renderer2D.cpp" />
-    <ClCompile Include="src\TinyEngine\Renderer\Framebuffer.cpp" />
-    <ClCompile Include="src\Platform\OpenGL\OpenGLFramebuffer.cpp" />
   </ItemGroup>
 </Project>

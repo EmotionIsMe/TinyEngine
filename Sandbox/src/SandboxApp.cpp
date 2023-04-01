@@ -196,7 +196,8 @@ public:
 class Sandbox : public TinyEngine::Application
 {
 public:
-	Sandbox() {
+	Sandbox() 
+		:Application("Sandbox Editor") {
 
 		// PushLayer(new ExampleLayer());
 		PushLayer(new Sandbox2D());

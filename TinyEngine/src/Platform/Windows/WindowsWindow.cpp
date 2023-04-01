@@ -24,13 +24,6 @@ namespace TinyEngine {
 		Init(props);
 	}
 
-	// APP.cpp 中m_window调用create的时候会走到这里来
-	// 之后可以用宏来判断到底是链接到哪个平台来实现
-	Window* Window::Create(const WindowProps& props)
-	{
-		return new WindowsWindow(props);
-	}
-
 	WindowsWindow::~WindowsWindow()
 	{
 		TE_PROFILE_FUNCTION();

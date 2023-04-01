@@ -19,10 +19,11 @@ IncludeDir ["ImGui"] = "TinyEngine/vendor/imgui"
 IncludeDir["glm"] = "TinyEngine/vendor/glm"
 IncludeDir["stb_image"] = "TinyEngine/vendor/stb_image"
 
-include "TinyEngine/vendor/GLFW"
-include "TinyEngine/vendor/Glad"
-include "TinyEngine/vendor/imgui"
-
+group "Dependencies"
+	include "TinyEngine/vendor/GLFW"
+	include "TinyEngine/vendor/Glad"
+	include "TinyEngine/vendor/imgui"
+group ""
 
 project "TinyEngine" --项目名称
     location "TinyEngine" --相对路径
@@ -98,6 +99,61 @@ project "TinyEngine" --项目名称
 
 project "Sandbox"
     location "Sandbox"
+    kind "ConsoleApp"
+    language "c++"
+	cppdialect "C++17"
+	staticruntime "on"
+
+    targetdir ("bin/" .. outputdir .. "/%{prj.name}")
+    objdir ("bin-int/" .. outputdir .. "/%{prj.name}")
+
+    files
+    {
+        "%{prj.name}/src/**.h",
+        "%{prj.name}/src/**.cpp"
+    }
+
+    includedirs
+    {
+        "TinyEngine/vendor/spdlog/include",
+		"TinyEngine/src",
+		"TinyEngine/vendor",
+		"%{IncludeDir.glm}"
+    }
+
+    links
+    {
+        "TinyEngine"
+    }
+
+    filter "system:windows"
+        systemversion "latest"
+
+        defines
+        {
+            "TE_PLATFORM_WINDOWS",
+            "_UNICODE",
+            "UNICODE",
+        }
+
+    filter "configurations:Debug"
+        defines "TE_DEBUG"
+        runtime "Debug"
+        symbols "on"
+
+    filter "configurations:Release"
+        defines "TE_RELEASE"
+        runtime "Release"
+        optimize "on"
+
+    filter "configurations:Dist"
+        defines "TE_DIST"
+        runtime "Release"
+        optimize "on"
+		
+
+project "Tiny-Editor"
+    location "Tiny-Editor"
     kind "ConsoleApp"
     language "c++"
 	cppdialect "C++17"
