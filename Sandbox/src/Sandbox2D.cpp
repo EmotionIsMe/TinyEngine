@@ -14,6 +14,12 @@ void Sandbox2D::OnAttach()
 	TE_PROFILE_FUNCTION();
 
 	m_CheckerboardTexture = TinyEngine::Texture2D::Create("assets/textures/Checkerboard.png");
+
+
+	TinyEngine::FramebufferSpecification fbSpec;
+	fbSpec.Width = 1920;
+	fbSpec.Height = 1080;
+	m_Framebuffer = TinyEngine::Framebuffer::Create(fbSpec);
 }
 
 void Sandbox2D::OnDetach()
@@ -33,6 +39,7 @@ void Sandbox2D::OnUpdate(TinyEngine::Timestep ts)
 	// Render
 	{
 		TE_PROFILE_SCOPE("Renderer Prep");
+		m_Framebuffer->Bind();
 		TinyEngine::RenderCommand::SetClearColor({ 0.1f, 0.1f, 0.1f, 1 });
 		TinyEngine::RenderCommand::Clear();
 	}
@@ -60,6 +67,7 @@ void Sandbox2D::OnUpdate(TinyEngine::Timestep ts)
 			}
 		}
 		TinyEngine::Renderer2D::EndScene();
+		m_Framebuffer->Unbind();
 	}
 }
 
@@ -140,8 +148,8 @@ void Sandbox2D::OnImGuiRender()
 
 		ImGui::ColorEdit4("Square Color", glm::value_ptr(m_SquareColor));
 
-		uint32_t textureID = m_CheckerboardTexture->GetRendererID();
-		ImGui::Image((void*)textureID, ImVec2{ 256.0f, 256.0f });
+		uint32_t textureID = m_Framebuffer->GetColorAttachmentRendererID();
+		ImGui::Image((void*)textureID, ImVec2{ 1920, 1080 });
 		ImGui::End();
 
 		ImGui::End();
@@ -160,7 +168,7 @@ void Sandbox2D::OnImGuiRender()
 		ImGui::ColorEdit4("Square Color", glm::value_ptr(m_SquareColor));
 
 		uint32_t textureID = m_CheckerboardTexture->GetRendererID();
-		ImGui::Image((void*)textureID, ImVec2{ 256.0f, 256.0f });
+		ImGui::Image((void*)textureID, ImVec2{ 1920.0f, 1080.0f });
 		ImGui::End();
 	}
 }
