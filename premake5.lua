@@ -18,6 +18,7 @@ IncludeDir ["Glad"] = "TinyEngine/vendor/GLAD/include"
 IncludeDir ["ImGui"] = "TinyEngine/vendor/imgui" 
 IncludeDir["glm"] = "TinyEngine/vendor/glm"
 IncludeDir["stb_image"] = "TinyEngine/vendor/stb_image"
+IncludeDir["entt"] = "TinyEngine/vendor/entt/include"
 
 group "Dependencies"
 	include "TinyEngine/vendor/GLFW"
@@ -61,7 +62,8 @@ project "TinyEngine" --ÏîÄ¿Ãû³Æ
 		"%{IncludeDir.Glad}",
 		"%{IncludeDir.ImGui}",
 		"%{IncludeDir.glm}",
-		"%{IncludeDir.stb_image}"
+		"%{IncludeDir.stb_image}",
+		"%{IncludeDir.entt}"
     }
 	
 	links
@@ -173,7 +175,8 @@ project "Tiny-Editor"
         "TinyEngine/vendor/spdlog/include",
 		"TinyEngine/src",
 		"TinyEngine/vendor",
-		"%{IncludeDir.glm}"
+		"%{IncludeDir.glm}",
+		"%{IncludeDir.entt}"
     }
 
     links

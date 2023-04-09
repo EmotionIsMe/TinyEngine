@@ -13,6 +13,9 @@
 
 #include "TinyEngine/imGui/ImGuiLayer.h"
 
+#include "TinyEngine/Scene/Scene.h"
+#include "TinyEngine/Scene/Components.h"
+
 // ---Renderer------------------------
 #include "TinyEngine/Renderer/Renderer.h"
 #include "TinyEngine/Renderer/Renderer2D.h"

@@ -28,6 +28,9 @@
     <Filter Include="src\TinyEngine\Renderer">
       <UniqueIdentifier>{9C27456A-085F-8D01-1169-F1247D1FB4FA}</UniqueIdentifier>
     </Filter>
+    <Filter Include="src\TinyEngine\Scene">
+      <UniqueIdentifier>{D3E4ED55-BF73-771F-6892-8B1A540088C5}</UniqueIdentifier>
+    </Filter>
     <Filter Include="src\TinyEngine\imGui">
       <UniqueIdentifier>{00FD8057-EC8B-0A21-95AA-1E1C81181BC7}</UniqueIdentifier>
     </Filter>
@@ -167,6 +170,12 @@
     </ClInclude>
     <ClInclude Include="src\TinyEngine\Renderer\VertexArray.h">
       <Filter>src\TinyEngine\Renderer</Filter>
+    </ClInclude>
+    <ClInclude Include="src\TinyEngine\Scene\Components.h">
+      <Filter>src\TinyEngine\Scene</Filter>
+    </ClInclude>
+    <ClInclude Include="src\TinyEngine\Scene\Scene.h">
+      <Filter>src\TinyEngine\Scene</Filter>
     </ClInclude>
     <ClInclude Include="src\TinyEngine\imGui\ImGuiLayer.h">
       <Filter>src\TinyEngine\imGui</Filter>
@@ -1339,6 +1348,9 @@
     </ClCompile>
     <ClCompile Include="src\TinyEngine\Renderer\VertexArray.cpp">
       <Filter>src\TinyEngine\Renderer</Filter>
+    </ClCompile>
+    <ClCompile Include="src\TinyEngine\Scene\Scene.cpp">
+      <Filter>src\TinyEngine\Scene</Filter>
     </ClCompile>
     <ClCompile Include="src\TinyEngine\imGui\ImGuiBuild.cpp">
       <Filter>src\TinyEngine\imGui</Filter>
