@@ -1275,6 +1275,7 @@
     <ClInclude Include="src\TinyEngine\Scene\Entity.h" />
     <ClInclude Include="src\TinyEngine\Renderer\Camera.h" />
     <ClInclude Include="src\TinyEngine\Scene\SceneCamera.h" />
+    <ClInclude Include="src\TinyEngine\Scene\ScriptableEntity.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\Platform\OpenGL\OpenGLBuffer.cpp">

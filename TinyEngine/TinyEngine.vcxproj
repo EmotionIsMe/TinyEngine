@@ -184,6 +184,7 @@
     <ClInclude Include="src\TinyEngine\Scene\Scene.h" />
     <ClInclude Include="src\TinyEngine\imGui\ImGuiLayer.h" />
     <ClInclude Include="src\tepch.h" />
+    <ClInclude Include="src\TinyEngine\Scene\ScriptableEntity.h" />
     <ClInclude Include="vendor\glm\glm\common.hpp" />
     <ClInclude Include="vendor\glm\glm\detail\_features.hpp" />
     <ClInclude Include="vendor\glm\glm\detail\_fixes.hpp" />
