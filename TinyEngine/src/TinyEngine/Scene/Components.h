@@ -1,7 +1,7 @@
 #pragma once
 #include <glm/glm.hpp>
 
-#include "TinyEngine/Renderer/Camera.h"
+#include "SceneCamera.h"
 
 namespace TinyEngine {
 
@@ -44,12 +44,11 @@ namespace TinyEngine {
 
 	struct CameraComponent
 	{
-		TinyEngine::Camera Camera;
+		SceneCamera Camera;
 		bool Primary = true; // TODO: think about moving to Scene
+		bool FixedAspectRatio = false;
 
 		CameraComponent() = default;
 		CameraComponent(const CameraComponent&) = default;
-		CameraComponent(const glm::mat4& projection)
-			: Camera(projection) {}
 	};
 }

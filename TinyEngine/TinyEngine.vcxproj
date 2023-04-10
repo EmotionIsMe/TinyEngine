@@ -140,6 +140,7 @@
     </Lib>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClInclude Include="src\TinyEngine\Scene\SceneCamera.h" />
     <ClInclude Include="src\TinyEngine\Renderer\Camera.h" />
     <ClInclude Include="src\TinyEngine\Scene\Entity.h" />
     <ClInclude Include="src\Platform\OpenGL\OpenGLBuffer.h" />
@@ -548,6 +549,7 @@
     <ClInclude Include="vendor\stb_image\stb_image.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="src\TinyEngine\Scene\SceneCamera.cpp" />
     <ClCompile Include="src\TinyEngine\Scene\Entity.cpp" />
     <ClCompile Include="src\Platform\OpenGL\OpenGLBuffer.cpp" />
     <ClCompile Include="src\Platform\OpenGL\OpenGLContext.cpp" />

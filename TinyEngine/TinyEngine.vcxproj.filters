@@ -1274,6 +1274,7 @@
     </ClInclude>
     <ClInclude Include="src\TinyEngine\Scene\Entity.h" />
     <ClInclude Include="src\TinyEngine\Renderer\Camera.h" />
+    <ClInclude Include="src\TinyEngine\Scene\SceneCamera.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\Platform\OpenGL\OpenGLBuffer.cpp">
@@ -1367,5 +1368,6 @@
       <Filter>vendor\stb_image</Filter>
     </ClCompile>
     <ClCompile Include="src\TinyEngine\Scene\Entity.cpp" />
+    <ClCompile Include="src\TinyEngine\Scene\SceneCamera.cpp" />
   </ItemGroup>
 </Project>
