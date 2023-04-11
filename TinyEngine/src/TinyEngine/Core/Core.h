@@ -1,5 +1,7 @@
 #pragma once
 
+#include <memory>
+
 #ifdef TE_PLATFORM_WINDOWS
 #if TE_DYNAMIC_LINK
 	#ifdef TE_BUILD_DLL
