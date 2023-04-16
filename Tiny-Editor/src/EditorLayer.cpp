@@ -46,8 +46,8 @@ namespace TinyEngine {
 		public:
 			virtual void OnCreate() override
 			{
-				auto& transform = GetComponent<TransformComponent>().Transform;
-				transform[3][0] = rand() % 10 - 5.0f;
+				auto& translation = GetComponent<TransformComponent>().Translation;
+				translation.x = rand() % 10 - 5.0f;
 			}
 
 			virtual void OnDestroy() override
@@ -56,17 +56,17 @@ namespace TinyEngine {
 
 			virtual void OnUpdate(Timestep ts) override
 			{
-				auto& transform = GetComponent<TransformComponent>().Transform;
+				auto& translation = GetComponent<TransformComponent>().Translation;
 				float speed = 5.0f;
 
-				if (Input::IsKeyPressed(KeyCode::A))
-					transform[3][0] -= speed * ts;
-				if (Input::IsKeyPressed(KeyCode::D))
-					transform[3][0] += speed * ts;
-				if (Input::IsKeyPressed(KeyCode::W))
-					transform[3][1] += speed * ts;
-				if (Input::IsKeyPressed(KeyCode::S))
-					transform[3][1] -= speed * ts;
+				if (Input::IsKeyPressed(Key::A))
+					translation.x -= speed * ts;
+				if (Input::IsKeyPressed(Key::D))
+					translation.x += speed * ts;
+				if (Input::IsKeyPressed(Key::W))
+					translation.y += speed * ts;
+				if (Input::IsKeyPressed(Key::S))
+					translation.y -= speed * ts;
 			}
 		};
 
