@@ -19,11 +19,13 @@ IncludeDir ["ImGui"] = "TinyEngine/vendor/imgui"
 IncludeDir["glm"] = "TinyEngine/vendor/glm"
 IncludeDir["stb_image"] = "TinyEngine/vendor/stb_image"
 IncludeDir["entt"] = "TinyEngine/vendor/entt/include"
+IncludeDir["yaml_cpp"] = "TinyEngine/vendor/yaml-cpp/include"
 
 group "Dependencies"
 	include "TinyEngine/vendor/GLFW"
 	include "TinyEngine/vendor/Glad"
 	include "TinyEngine/vendor/imgui"
+	include "TinyEngine/vendor/yaml-cpp"
 group ""
 
 project "TinyEngine" --项目名称
@@ -63,7 +65,8 @@ project "TinyEngine" --项目名称
 		"%{IncludeDir.ImGui}",
 		"%{IncludeDir.glm}",
 		"%{IncludeDir.stb_image}",
-		"%{IncludeDir.entt}"
+		"%{IncludeDir.entt}",
+		"%{IncludeDir.yaml_cpp}"
     }
 	
 	links
@@ -71,6 +74,7 @@ project "TinyEngine" --项目名称
         "GLFW",
 		"Glad",
 		"ImGui",
+		"yaml-cpp",
         "opengl32.lib"
     }
 

@@ -77,7 +77,7 @@
       <PrecompiledHeaderFile>tepch.h</PrecompiledHeaderFile>
       <WarningLevel>Level3</WarningLevel>
       <PreprocessorDefinitions>_CRT_SECURE_NO_WARNINGS;TE_BUILD_DLL;TE_PLATFORM_WINDOWS;GLFW_INCLUDE_NONE;TE_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
-      <AdditionalIncludeDirectories>src;vendor\spdlog\include;vendor\GLFW\include;vendor\GLAD\include;vendor\imgui;vendor\glm;vendor\stb_image;vendor\entt\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>src;vendor\spdlog\include;vendor\GLFW\include;vendor\GLAD\include;vendor\imgui;vendor\glm;vendor\stb_image;vendor\entt\include;vendor\yaml-cpp\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <DebugInformationFormat>EditAndContinue</DebugInformationFormat>
       <Optimization>Disabled</Optimization>
       <RuntimeLibrary>MultiThreadedDebug</RuntimeLibrary>
@@ -97,7 +97,7 @@
       <PrecompiledHeaderFile>tepch.h</PrecompiledHeaderFile>
       <WarningLevel>Level3</WarningLevel>
       <PreprocessorDefinitions>_CRT_SECURE_NO_WARNINGS;TE_BUILD_DLL;TE_PLATFORM_WINDOWS;GLFW_INCLUDE_NONE;TE_RELEASE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
-      <AdditionalIncludeDirectories>src;vendor\spdlog\include;vendor\GLFW\include;vendor\GLAD\include;vendor\imgui;vendor\glm;vendor\stb_image;vendor\entt\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>src;vendor\spdlog\include;vendor\GLFW\include;vendor\GLAD\include;vendor\imgui;vendor\glm;vendor\stb_image;vendor\entt\include;vendor\yaml-cpp\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <Optimization>Full</Optimization>
       <FunctionLevelLinking>true</FunctionLevelLinking>
       <IntrinsicFunctions>true</IntrinsicFunctions>
@@ -121,7 +121,7 @@
       <PrecompiledHeaderFile>tepch.h</PrecompiledHeaderFile>
       <WarningLevel>Level3</WarningLevel>
       <PreprocessorDefinitions>_CRT_SECURE_NO_WARNINGS;TE_BUILD_DLL;TE_PLATFORM_WINDOWS;GLFW_INCLUDE_NONE;TE_DIST;%(PreprocessorDefinitions)</PreprocessorDefinitions>
-      <AdditionalIncludeDirectories>src;vendor\spdlog\include;vendor\GLFW\include;vendor\GLAD\include;vendor\imgui;vendor\glm;vendor\stb_image;vendor\entt\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>src;vendor\spdlog\include;vendor\GLFW\include;vendor\GLAD\include;vendor\imgui;vendor\glm;vendor\stb_image;vendor\entt\include;vendor\yaml-cpp\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <Optimization>Full</Optimization>
       <FunctionLevelLinking>true</FunctionLevelLinking>
       <IntrinsicFunctions>true</IntrinsicFunctions>
@@ -140,9 +140,6 @@
     </Lib>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClInclude Include="src\TinyEngine\Scene\SceneCamera.h" />
-    <ClInclude Include="src\TinyEngine\Renderer\Camera.h" />
-    <ClInclude Include="src\TinyEngine\Scene\Entity.h" />
     <ClInclude Include="src\Platform\OpenGL\OpenGLBuffer.h" />
     <ClInclude Include="src\Platform\OpenGL\OpenGLContext.h" />
     <ClInclude Include="src\Platform\OpenGL\OpenGLFramebuffer.h" />
@@ -169,6 +166,7 @@
     <ClInclude Include="src\TinyEngine\Events\KeyEvent.h" />
     <ClInclude Include="src\TinyEngine\Events\MouseEvent.h" />
     <ClInclude Include="src\TinyEngine\Renderer\Buffer.h" />
+    <ClInclude Include="src\TinyEngine\Renderer\Camera.h" />
     <ClInclude Include="src\TinyEngine\Renderer\Framebuffer.h" />
     <ClInclude Include="src\TinyEngine\Renderer\GraphicsContext.h" />
     <ClInclude Include="src\TinyEngine\Renderer\OrthographicCamera.h" />
@@ -181,10 +179,13 @@
     <ClInclude Include="src\TinyEngine\Renderer\Texture.h" />
     <ClInclude Include="src\TinyEngine\Renderer\VertexArray.h" />
     <ClInclude Include="src\TinyEngine\Scene\Components.h" />
+    <ClInclude Include="src\TinyEngine\Scene\Entity.h" />
     <ClInclude Include="src\TinyEngine\Scene\Scene.h" />
+    <ClInclude Include="src\TinyEngine\Scene\SceneCamera.h" />
+    <ClInclude Include="src\TinyEngine\Scene\SceneSerializer.h" />
+    <ClInclude Include="src\TinyEngine\Scene\ScriptableEntity.h" />
     <ClInclude Include="src\TinyEngine\imGui\ImGuiLayer.h" />
     <ClInclude Include="src\tepch.h" />
-    <ClInclude Include="src\TinyEngine\Scene\ScriptableEntity.h" />
     <ClInclude Include="vendor\glm\glm\common.hpp" />
     <ClInclude Include="vendor\glm\glm\detail\_features.hpp" />
     <ClInclude Include="vendor\glm\glm\detail\_fixes.hpp" />
@@ -550,8 +551,6 @@
     <ClInclude Include="vendor\stb_image\stb_image.h" />
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="src\TinyEngine\Scene\SceneCamera.cpp" />
-    <ClCompile Include="src\TinyEngine\Scene\Entity.cpp" />
     <ClCompile Include="src\Platform\OpenGL\OpenGLBuffer.cpp" />
     <ClCompile Include="src\Platform\OpenGL\OpenGLContext.cpp" />
     <ClCompile Include="src\Platform\OpenGL\OpenGLFramebuffer.cpp" />
@@ -577,7 +576,10 @@
     <ClCompile Include="src\TinyEngine\Renderer\Shader.cpp" />
     <ClCompile Include="src\TinyEngine\Renderer\Texture.cpp" />
     <ClCompile Include="src\TinyEngine\Renderer\VertexArray.cpp" />
+    <ClCompile Include="src\TinyEngine\Scene\Entity.cpp" />
     <ClCompile Include="src\TinyEngine\Scene\Scene.cpp" />
+    <ClCompile Include="src\TinyEngine\Scene\SceneCamera.cpp" />
+    <ClCompile Include="src\TinyEngine\Scene\SceneSerializer.cpp" />
     <ClCompile Include="src\TinyEngine\imGui\ImGuiBuild.cpp" />
     <ClCompile Include="src\TinyEngine\imGui\ImGuiLayer.cpp" />
     <ClCompile Include="src\tepch.cpp">
@@ -594,6 +596,9 @@
     </ProjectReference>
     <ProjectReference Include="vendor\imgui\ImGui.vcxproj">
       <Project>{C0FF640D-2C14-8DBE-F595-301E616989EF}</Project>
+    </ProjectReference>
+    <ProjectReference Include="vendor\yaml-cpp\yaml-cpp.vcxproj">
+      <Project>{88F1A057-74BE-FB62-9DD7-E90A890331F1}</Project>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

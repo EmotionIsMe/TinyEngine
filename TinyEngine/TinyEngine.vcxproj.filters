@@ -138,6 +138,9 @@
     <ClInclude Include="src\TinyEngine\Renderer\Buffer.h">
       <Filter>src\TinyEngine\Renderer</Filter>
     </ClInclude>
+    <ClInclude Include="src\TinyEngine\Renderer\Camera.h">
+      <Filter>src\TinyEngine\Renderer</Filter>
+    </ClInclude>
     <ClInclude Include="src\TinyEngine\Renderer\Framebuffer.h">
       <Filter>src\TinyEngine\Renderer</Filter>
     </ClInclude>
@@ -174,7 +177,19 @@
     <ClInclude Include="src\TinyEngine\Scene\Components.h">
       <Filter>src\TinyEngine\Scene</Filter>
     </ClInclude>
+    <ClInclude Include="src\TinyEngine\Scene\Entity.h">
+      <Filter>src\TinyEngine\Scene</Filter>
+    </ClInclude>
     <ClInclude Include="src\TinyEngine\Scene\Scene.h">
+      <Filter>src\TinyEngine\Scene</Filter>
+    </ClInclude>
+    <ClInclude Include="src\TinyEngine\Scene\SceneCamera.h">
+      <Filter>src\TinyEngine\Scene</Filter>
+    </ClInclude>
+    <ClInclude Include="src\TinyEngine\Scene\SceneSerializer.h">
+      <Filter>src\TinyEngine\Scene</Filter>
+    </ClInclude>
+    <ClInclude Include="src\TinyEngine\Scene\ScriptableEntity.h">
       <Filter>src\TinyEngine\Scene</Filter>
     </ClInclude>
     <ClInclude Include="src\TinyEngine\imGui\ImGuiLayer.h">
@@ -1272,10 +1287,6 @@
     <ClInclude Include="vendor\stb_image\stb_image.h">
       <Filter>vendor\stb_image</Filter>
     </ClInclude>
-    <ClInclude Include="src\TinyEngine\Scene\Entity.h" />
-    <ClInclude Include="src\TinyEngine\Renderer\Camera.h" />
-    <ClInclude Include="src\TinyEngine\Scene\SceneCamera.h" />
-    <ClInclude Include="src\TinyEngine\Scene\ScriptableEntity.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\Platform\OpenGL\OpenGLBuffer.cpp">
@@ -1353,7 +1364,16 @@
     <ClCompile Include="src\TinyEngine\Renderer\VertexArray.cpp">
       <Filter>src\TinyEngine\Renderer</Filter>
     </ClCompile>
+    <ClCompile Include="src\TinyEngine\Scene\Entity.cpp">
+      <Filter>src\TinyEngine\Scene</Filter>
+    </ClCompile>
     <ClCompile Include="src\TinyEngine\Scene\Scene.cpp">
+      <Filter>src\TinyEngine\Scene</Filter>
+    </ClCompile>
+    <ClCompile Include="src\TinyEngine\Scene\SceneCamera.cpp">
+      <Filter>src\TinyEngine\Scene</Filter>
+    </ClCompile>
+    <ClCompile Include="src\TinyEngine\Scene\SceneSerializer.cpp">
       <Filter>src\TinyEngine\Scene</Filter>
     </ClCompile>
     <ClCompile Include="src\TinyEngine\imGui\ImGuiBuild.cpp">
@@ -1368,7 +1388,5 @@
     <ClCompile Include="vendor\stb_image\stb_image.cpp">
       <Filter>vendor\stb_image</Filter>
     </ClCompile>
-    <ClCompile Include="src\TinyEngine\Scene\Entity.cpp" />
-    <ClCompile Include="src\TinyEngine\Scene\SceneCamera.cpp" />
   </ItemGroup>
 </Project>

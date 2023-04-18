@@ -10,3 +10,6 @@
 [submodule "TinyEngine/vendor/glm"]
 	path = TinyEngine/vendor/glm
 	url = https://github.com/g-truc/glm.git
+[submodule "TinyEngine/vendor/yaml-cpp"]
+	path = TinyEngine/vendor/yaml-cpp
+	url = https://github.com/TheCherno/yaml-cpp.git
