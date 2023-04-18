@@ -1300,6 +1300,7 @@
       <Filter>vendor\stb_image</Filter>
     </ClInclude>
     <ClInclude Include="src\TinyEngine\Math\Math.h" />
+    <ClInclude Include="src\TinyEngine\Renderer\EditorCamera.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\Platform\OpenGL\OpenGLBuffer.cpp">
@@ -1408,5 +1409,6 @@
       <Filter>vendor\stb_image</Filter>
     </ClCompile>
     <ClCompile Include="src\TinyEngine\Math\Math.cpp" />
+    <ClCompile Include="src\TinyEngine\Renderer\EditorCamera.cpp" />
   </ItemGroup>
 </Project>

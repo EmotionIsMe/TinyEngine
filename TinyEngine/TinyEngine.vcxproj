@@ -168,6 +168,7 @@
     <ClInclude Include="src\TinyEngine\Math\Math.h" />
     <ClInclude Include="src\TinyEngine\Renderer\Buffer.h" />
     <ClInclude Include="src\TinyEngine\Renderer\Camera.h" />
+    <ClInclude Include="src\TinyEngine\Renderer\EditorCamera.h" />
     <ClInclude Include="src\TinyEngine\Renderer\Framebuffer.h" />
     <ClInclude Include="src\TinyEngine\Renderer\GraphicsContext.h" />
     <ClInclude Include="src\TinyEngine\Renderer\OrthographicCamera.h" />
@@ -571,6 +572,7 @@
     <ClCompile Include="src\TinyEngine\Core\Window.cpp" />
     <ClCompile Include="src\TinyEngine\Math\Math.cpp" />
     <ClCompile Include="src\TinyEngine\Renderer\Buffer.cpp" />
+    <ClCompile Include="src\TinyEngine\Renderer\EditorCamera.cpp" />
     <ClCompile Include="src\TinyEngine\Renderer\Framebuffer.cpp" />
     <ClCompile Include="src\TinyEngine\Renderer\OrthographicCamera.cpp" />
     <ClCompile Include="src\TinyEngine\Renderer\OrthographicCameraController.cpp" />

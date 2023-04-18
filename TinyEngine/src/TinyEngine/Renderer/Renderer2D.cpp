@@ -132,12 +132,16 @@ namespace TinyEngine {
 		StartBatch();
 	}
 
-	void Renderer2D::StartBatch()
+	void Renderer2D::BeginScene(const EditorCamera& camera)
 	{
-		s_Data.QuadIndexCount = 0;
-		s_Data.QuadVertexBufferPtr = s_Data.QuadVertexBufferBase;
+		TE_PROFILE_FUNCTION();
 
-		s_Data.TextureSlotIndex = 1;
+		glm::mat4 viewProj = camera.GetViewProjection();
+
+		s_Data.TextureShader->Bind();
+		s_Data.TextureShader->SetMat4("u_ViewProjection", viewProj);
+
+		StartBatch();
 	}
 
 	void Renderer2D::EndScene()
@@ -145,6 +149,14 @@ namespace TinyEngine {
 		TE_PROFILE_FUNCTION();
 
 		Flush();
+	}
+
+	void Renderer2D::StartBatch()
+	{
+		s_Data.QuadIndexCount = 0;
+		s_Data.QuadVertexBufferPtr = s_Data.QuadVertexBufferBase;
+
+		s_Data.TextureSlotIndex = 1;
 	}
 
 	void Renderer2D::Flush()
