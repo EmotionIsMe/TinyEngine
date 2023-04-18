@@ -1,10 +1,11 @@
 #pragma once
 #include "tepch.h"
-#include "Event.h"
+#include "TinyEngine/Events/Event.h"
+#include "TinyEngine/Core/MouseCodes.h"
 
 namespace TinyEngine {
 
-	class TE_API MouseMovedEvent : public Event
+	class MouseMovedEvent : public Event
 	{
 	public:
 		MouseMovedEvent(const float x, const float y)
@@ -26,7 +27,7 @@ namespace TinyEngine {
 		float m_MouseX, m_MouseY;
 	};
 
-	class TE_API MouseScrolledEvent : public Event
+	class MouseScrolledEvent : public Event
 	{
 	public:
 		MouseScrolledEvent(const float xOffset, const float yOffset)
@@ -48,23 +49,23 @@ namespace TinyEngine {
 		float m_XOffset, m_YOffset;
 	};
 
-	class TE_API MouseButtonEvent : public Event
+	class MouseButtonEvent : public Event
 	{
 	public:
 		inline int GetMouseButton() const { return m_Button; }
 
 		EVENT_CLASS_CATEGORY(EventCategoryMouse | EventCategoryInput | EventCategoryMouseButton)
 	protected:
-		MouseButtonEvent(int button)
+		MouseButtonEvent(const MouseCode button)
 			: m_Button(button) {}
 
-		int m_Button;
+		MouseCode m_Button;
 	};
 
-	class TE_API MouseButtonPressedEvent : public MouseButtonEvent
+	class MouseButtonPressedEvent : public MouseButtonEvent
 	{
 	public:
-		MouseButtonPressedEvent(int button)
+		MouseButtonPressedEvent(const MouseCode button)
 			: MouseButtonEvent(button) {}
 
 		std::string ToString() const override
@@ -77,10 +78,10 @@ namespace TinyEngine {
 		EVENT_CLASS_TYPE(MouseButtonPressed)
 	};
 
-	class TE_API MouseButtonReleasedEvent : public MouseButtonEvent
+	class MouseButtonReleasedEvent : public MouseButtonEvent
 	{
 	public:
-		MouseButtonReleasedEvent(int button)
+		MouseButtonReleasedEvent(const MouseCode button)
 			: MouseButtonEvent(button) {}
 
 		std::string ToString() const override

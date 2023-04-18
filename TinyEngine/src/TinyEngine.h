@@ -8,7 +8,7 @@
 
 #include "TinyEngine/Core/Input.h"
 #include "TinyEngine/Core/KeyCodes.h"
-#include "TinyEngine/Core/MouseButtonCodes.h"
+#include "TinyEngine/Core/MouseCodes.h"
 #include "TinyEngine/Renderer/OrthographicCameraController.h"
 
 #include "TinyEngine/imGui/ImGuiLayer.h"
