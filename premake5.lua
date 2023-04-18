@@ -20,6 +20,7 @@ IncludeDir["glm"] = "TinyEngine/vendor/glm"
 IncludeDir["stb_image"] = "TinyEngine/vendor/stb_image"
 IncludeDir["entt"] = "TinyEngine/vendor/entt/include"
 IncludeDir["yaml_cpp"] = "TinyEngine/vendor/yaml-cpp/include"
+IncludeDir["ImGuizmo"] = "TinyEngine/vendor/ImGuizmo"
 
 group "Dependencies"
 	include "TinyEngine/vendor/GLFW"
@@ -49,6 +50,8 @@ project "TinyEngine" --项目名称
 		"%{prj.name}/vendor/stb_image/**.cpp",
 		"%{prj.name}/vendor/glm/glm/**.hpp",
 		"%{prj.name}/vendor/glm/glm/**.inl",
+		"%{prj.name}/vendor/ImGuizmo/ImGuizmo.h",
+		"%{prj.name}/vendor/ImGuizmo/ImGuizmo.cpp"
     }
 	
 	defines
@@ -66,7 +69,8 @@ project "TinyEngine" --项目名称
 		"%{IncludeDir.glm}",
 		"%{IncludeDir.stb_image}",
 		"%{IncludeDir.entt}",
-		"%{IncludeDir.yaml_cpp}"
+		"%{IncludeDir.yaml_cpp}",
+		"%{IncludeDir.ImGuizmo}"
     }
 	
 	links
@@ -77,6 +81,9 @@ project "TinyEngine" --项目名称
 		"yaml-cpp",
         "opengl32.lib"
     }
+	
+	filter "files:TinyEngine/vendor/ImGuizmo/**.cpp"
+	flags { "NoPCH" }
 
     filter "system:windows"--windows平台的配置
         systemversion "latest"
@@ -180,7 +187,8 @@ project "Tiny-Editor"
 		"TinyEngine/src",
 		"TinyEngine/vendor",
 		"%{IncludeDir.glm}",
-		"%{IncludeDir.entt}"
+		"%{IncludeDir.entt}",
+		"%{IncludeDir.ImGuizmo}"
     }
 
     links

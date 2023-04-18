@@ -13,3 +13,6 @@
 [submodule "TinyEngine/vendor/yaml-cpp"]
 	path = TinyEngine/vendor/yaml-cpp
 	url = https://github.com/TheCherno/yaml-cpp.git
+[submodule "TinyEngine/vendor/ImGuizmo"]
+	path = TinyEngine/vendor/ImGuizmo
+	url = https://github.com/TheCherno/ImGuizmo.git
