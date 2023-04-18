@@ -111,9 +111,6 @@
     <ClInclude Include="src\TinyEngine\Core\Log.h">
       <Filter>src\TinyEngine\Core</Filter>
     </ClInclude>
-    <ClInclude Include="src\TinyEngine\Core\MouseButtonCodes.h">
-      <Filter>src\TinyEngine\Core</Filter>
-    </ClInclude>
     <ClInclude Include="src\TinyEngine\Core\Timestep.h">
       <Filter>src\TinyEngine\Core</Filter>
     </ClInclude>
@@ -1287,6 +1284,10 @@
     <ClInclude Include="vendor\stb_image\stb_image.h">
       <Filter>vendor\stb_image</Filter>
     </ClInclude>
+    <ClInclude Include="src\TinyEngine\Utils\PlatformUtils.h" />
+    <ClInclude Include="src\TinyEngine\Core\MouseCodes.h">
+      <Filter>src\TinyEngine\Core</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\Platform\OpenGL\OpenGLBuffer.cpp">
@@ -1388,5 +1389,6 @@
     <ClCompile Include="vendor\stb_image\stb_image.cpp">
       <Filter>vendor\stb_image</Filter>
     </ClCompile>
+    <ClCompile Include="src\Platform\Windows\WindowsPlatformUtils.cpp" />
   </ItemGroup>
 </Project>
