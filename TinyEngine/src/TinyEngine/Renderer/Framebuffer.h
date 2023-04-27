@@ -44,6 +44,7 @@ namespace TinyEngine {
 		FramebufferAttachmentSpecification Attachments;
 		uint32_t Samples = 1;
 
+		// 当SwapChainTarget为true时, 在OpenGL里会执行glBindFramebuffer(0);
 		bool SwapChainTarget = false;
 	};
 

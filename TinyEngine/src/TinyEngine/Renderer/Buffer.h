@@ -9,6 +9,7 @@ namespace TinyEngine {
 
 	static uint32_t ShaderDataTypeSize(ShaderDataType type)
 	{
+		// 根据Type，拆出来数据的个数
 		switch (type)
 		{
 		case ShaderDataType::Float:    return 4;
@@ -32,8 +33,8 @@ namespace TinyEngine {
 	{
 		std::string Name;
 		ShaderDataType Type;
-		uint32_t Size;
-		uint32_t Offset;
+		uint32_t Size;			// Size可以根据ShaderDataType的类型算出来，比如Float3就是12个字节
+		uint32_t Offset;		// Offset要根据BufferLayout的vector的前面的BufferElement的size加起来求和得到
 		bool Normalized;
 
 		BufferElement() {}
@@ -87,7 +88,8 @@ namespace TinyEngine {
 		void CalculateOffsetsAndStride()
 		{
 			uint32_t offset = 0;
-			m_Stride = 0;
+			m_Stride = 0;// m_Stride是成员变量，用于描述VertexBuffer里的步长
+			// 遍历元素，根据其Size进行累加算出offset，比较简单
 			for (auto& element : m_Elements)
 			{
 				element.Offset = offset;

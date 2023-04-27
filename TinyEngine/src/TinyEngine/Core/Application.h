@@ -15,6 +15,8 @@
 
 namespace TinyEngine {
 
+	// 创建一个Application类代表游戏基类
+	// 一个游戏只需要有一个LayerStack，用于存放多个Layer
 	class  Application
 	{
 	public:

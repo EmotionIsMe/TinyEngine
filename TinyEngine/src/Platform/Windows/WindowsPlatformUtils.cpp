@@ -1,6 +1,7 @@
 #include "tepch.h"
 #include "TinyEngine/Utils/PlatformUtils.h"
 
+// 使用windows sdk里提供的头文件
 #include <commdlg.h>
 #include <GLFW/glfw3.h>
 #define GLFW_EXPOSE_NATIVE_WIN32
@@ -10,11 +11,15 @@
 
 namespace TinyEngine {
 
+	// 打开搜索文件的窗口
 	std::string FileDialogs::OpenFile(const char* filter)
 	{
+		// 打开搜索文件的窗口, 需要传入一个OPENFILENAMEA对象
 		OPENFILENAMEA ofn;
 		CHAR szFile[260] = { 0 };
 		ZeroMemory(&ofn, sizeof(OPENFILENAME));
+
+		// 填充ofn的信息
 		ofn.lStructSize = sizeof(OPENFILENAME);
 		ofn.hwndOwner = glfwGetWin32Window((GLFWwindow*)Application::Get().GetWindow().GetNativeWindow());
 		ofn.lpstrFile = szFile;
@@ -22,6 +27,7 @@ namespace TinyEngine {
 		ofn.lpstrFilter = filter;
 		ofn.nFilterIndex = 1;
 		ofn.Flags = OFN_PATHMUSTEXIST | OFN_FILEMUSTEXIST | OFN_NOCHANGEDIR;
+		// 调用win32 api
 		if (GetOpenFileNameA(&ofn) == TRUE)
 		{
 			return ofn.lpstrFile;

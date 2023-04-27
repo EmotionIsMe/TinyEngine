@@ -4,6 +4,7 @@
 
 namespace TinyEngine {
 
+	// 序列化的顺序按范围从大到小，先是Scene，再是Entity，然后是Component
 	class SceneSerializer
 	{
 	public:

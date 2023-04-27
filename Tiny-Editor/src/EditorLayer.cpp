@@ -29,12 +29,14 @@ namespace TinyEngine {
 		fbSpec.Height = 1080;
 		m_Framebuffer = Framebuffer::Create(fbSpec);
 
+		// 创建一个活动的Scene  这个Scene 又可以有多个Entity
 		m_ActiveScene = CreateRef<Scene>();
 
 		m_EditorCamera = EditorCamera(30.0f, 1.778f, 0.1f, 1000.0f);
 
 #if 0
 		// Entity
+		// EditorLayer 初始化的时候创建了一些Entity 并添加了一些SpriteRendererComponent 用于测试
 		auto square = m_ActiveScene->CreateEntity("Green Square");
 		square.AddComponent<SpriteRendererComponent>(glm::vec4{ 0.0f, 1.0f, 0.0f, 1.0f });
 
@@ -43,6 +45,8 @@ namespace TinyEngine {
 
 		m_SquareEntity = square;
 
+		// EditorLayer 初始化的时候创建了一些Entity 并添加了一些 CameraComponent 用于测试
+		// Camera A 和 Camera B 分别用于在不同视角看绘制对象
 		m_CameraEntity = m_ActiveScene->CreateEntity("Camera A");
 		m_CameraEntity.AddComponent<CameraComponent>();
 
@@ -97,6 +101,8 @@ namespace TinyEngine {
 		TE_PROFILE_FUNCTION();
 
 		// resize
+		// 放前面先画, 是为了防止重新生成Framebuffer的ColorAttachment以后, 当前帧渲染会出现黑屏的情况
+		// 当Viewport的Size改变时, 更新Framebuffer的ColorAttachment的Size, 同时调用其他函数
 		if (FramebufferSpecification spec = m_Framebuffer->GetSpecification();
 			m_ViewportSize.x > 0.0f && m_ViewportSize.y > 0.0f && // zero sized framebuffer is invalid
 			(spec.Width != m_ViewportSize.x || spec.Height != m_ViewportSize.y))
@@ -112,6 +118,7 @@ namespace TinyEngine {
 		if (m_ViewportFocused)
 			m_CameraController.OnUpdate(ts);
 
+		// 更新EditorCamera
 		m_EditorCamera.OnUpdate(ts);
 
 		TinyEngine::Renderer2D::ResetStats();
@@ -121,7 +128,7 @@ namespace TinyEngine {
 		RenderCommand::SetClearColor({ 0.1f, 0.1f, 0.1f, 1 });
 		RenderCommand::Clear();
 
-		// Update scene
+		// Update scene  开始更新场景
 		m_ActiveScene->OnUpdateEditor(ts, m_EditorCamera);
 
 		auto[mx, my] = ImGui::GetMousePos();
@@ -145,6 +152,7 @@ namespace TinyEngine {
 	{
 		TE_PROFILE_FUNCTION();
 
+		// 绘制Dockspace的代码
 		// Note: Switch this to true to enable dockspace
 		static bool dockspaceOpen = true;
 		static bool opt_fullscreen_persistant = true;
@@ -220,6 +228,7 @@ namespace TinyEngine {
 
 		m_SceneHierarchyPanel.OnImGuiRender();
 
+		// 绘制RenderStats的代码
 		ImGui::Begin("Stats");
 
 		auto stats = Renderer2D::GetStats();
@@ -232,10 +241,14 @@ namespace TinyEngine {
 		ImGui::End();
 
 		ImGui::PushStyleVar(ImGuiStyleVar_WindowPadding, ImVec2{ 0, 0 });
+
+		// 绘制Viewport
 		ImGui::Begin("Viewport");
 		auto viewportOffset = ImGui::GetCursorPos(); // Includes tab bar
 
 		// 如果鼠标在viewport 区域
+		// BeginWindow之后, 这里返回的就是该Window的Focus状态了
+	    // 这里Begin()操作应该会把viewport设置为当前window
 		m_ViewportFocused = ImGui::IsWindowFocused();
 		m_ViewportHovered = ImGui::IsWindowHovered();
 		Application::Get().GetImGuiLayer()->BlockEvents(!m_ViewportFocused && !m_ViewportHovered);
@@ -259,6 +272,7 @@ namespace TinyEngine {
 		Entity selectedEntity = m_SceneHierarchyPanel.GetSelectedEntity();
 		if (selectedEntity && m_GizmoType != -1)
 		{
+			// ImGui的摄像机投影为正交投影
 			ImGuizmo::SetOrthographic(false);
 			ImGuizmo::SetDrawlist();
 
@@ -290,6 +304,7 @@ namespace TinyEngine {
 
 			float snapValues[3] = { snapValue, snapValue, snapValue };
 
+			// 绘制的时候, 需要传入camera的v和p矩阵, 再传入要看物体的transform矩阵即可, 就会绘制出其localGizmos
 			ImGuizmo::Manipulate(glm::value_ptr(cameraView), glm::value_ptr(cameraProjection),
 				(ImGuizmo::OPERATION)m_GizmoType, ImGuizmo::LOCAL, glm::value_ptr(transform),
 				nullptr, snap ? snapValues : nullptr);
@@ -369,6 +384,7 @@ namespace TinyEngine {
 		}
 	}
 
+	// 新建一个scene
 	void EditorLayer::NewScene()
 	{
 		m_ActiveScene = CreateRef<Scene>();
@@ -376,6 +392,7 @@ namespace TinyEngine {
 		m_SceneHierarchyPanel.SetContext(m_ActiveScene);
 	}
 
+	// 打开一个scene
 	void EditorLayer::OpenScene()
 	{
 		std::string filepath = FileDialogs::OpenFile("Hazel Scene (*.hazel)\0*.hazel\0");
@@ -390,6 +407,7 @@ namespace TinyEngine {
 		}
 	}
 
+	//  保存一个scene
 	void EditorLayer::SaveSceneAs()
 	{
 		std::string filepath = FileDialogs::SaveFile("Hazel Scene (*.hazel)\0*.hazel\0");

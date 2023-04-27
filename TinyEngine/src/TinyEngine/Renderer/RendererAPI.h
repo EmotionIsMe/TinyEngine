@@ -9,11 +9,13 @@ namespace TinyEngine {
 	class RendererAPI
 	{
 	public:
+		// 渲染API的类型, 这一块应该由RendererAPI负责, 而不是Renderer负责
 		enum class API
 		{
 			None = 0, OpenGL = 1
 		};
 	public:
+		// 把相关代码抽象成以下三个接口，放在RenderAPI类里
 		virtual void Init() = 0;
 		virtual void SetViewport(uint32_t x, uint32_t y, uint32_t width, uint32_t height) = 0;
 		virtual void SetClearColor(const glm::vec4& color) = 0;

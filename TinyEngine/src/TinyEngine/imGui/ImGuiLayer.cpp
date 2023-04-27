@@ -24,13 +24,17 @@ namespace TinyEngine {
 	{
 	}
 
+	// 初始化imGUI
 	void ImGuiLayer::OnAttach()
 	{
 		TE_PROFILE_FUNCTION();
 
+		// 这里的函数，参考了ImGui上的docking分支给的例子：example_glfw_opengl3的文件里的main函数
 		// Setup Dear ImGui context
 		IMGUI_CHECKVERSION();
+		// 1. 创建ImGui Contex
 		ImGui::CreateContext();
+		// 2. IO相关的Flag设置, 目前允许键盘输入、允许Dokcing、允许多个Viewport
 		ImGuiIO& io = ImGui::GetIO(); (void)io;
 		io.ConfigFlags |= ImGuiConfigFlags_NavEnableKeyboard;       // Enable Keyboard Controls
 		//io.ConfigFlags |= ImGuiConfigFlags_NavEnableGamepad;      // Enable Gamepad Controls
@@ -39,10 +43,11 @@ namespace TinyEngine {
 		//io.ConfigFlags |= ImGuiConfigFlags_ViewportsNoTaskBarIcons;
 		//io.ConfigFlags |= ImGuiConfigFlags_ViewportsNoMerge;
 
+		//加载bold font
 		io.Fonts->AddFontFromFileTTF("assets/fonts/opensans/OpenSans-Bold.ttf", 18.0f);
 		io.FontDefault = io.Fonts->AddFontFromFileTTF("assets/fonts/opensans/OpenSans-Regular.ttf", 18.0f);
 
-		// Setup Dear ImGui style
+		// Setup Dear ImGui style  设置主题
 		ImGui::StyleColorsDark();
 		//ImGui::StyleColorsClassic();
 
@@ -73,6 +78,7 @@ namespace TinyEngine {
 		ImGui::DestroyContext();
 	}
 
+	// 配置imGUI的Event
 	void ImGuiLayer::OnEvent(Event& e)
 	{
 		if (m_BlockEvents)

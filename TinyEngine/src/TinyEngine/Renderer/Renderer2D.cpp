@@ -30,10 +30,12 @@ namespace TinyEngine {
 		Ref<Shader> TextureShader;
 		Ref<Texture2D> WhiteTexture;
 
+		// 添加这三个数据, 用于动态更改Vertex Buffer和记录绘制的三角形个数
 		uint32_t QuadIndexCount = 0;
 		QuadVertex* QuadVertexBufferBase = nullptr;
 		QuadVertex* QuadVertexBufferPtr = nullptr;
 
+		// 创建TextureSlots数组，数组大小为32，数组id对应的是贴图槽位
 		std::array<Ref<Texture2D>, MaxTextureSlots> TextureSlots;
 		uint32_t TextureSlotIndex = 1; // 0 = white texture
 
@@ -92,6 +94,8 @@ namespace TinyEngine {
 
 		s_Data.TextureShader = Shader::Create("assets/shaders/Texture.glsl");
 		s_Data.TextureShader->Bind();
+		
+		// 向GPU里面传入了一个texture 相关的数组，最终绘制纹理的时候是通过这个数组的索引进行绘制的
 		s_Data.TextureShader->SetIntArray("u_Textures", samplers, s_Data.MaxTextureSlots);
 
 		// Set all texture slots to 0
@@ -153,6 +157,7 @@ namespace TinyEngine {
 
 	void Renderer2D::StartBatch()
 	{
+		// 开始batch draw的时候，都需要在begin sence 场景初始化s_data
 		s_Data.QuadIndexCount = 0;
 		s_Data.QuadVertexBufferPtr = s_Data.QuadVertexBufferBase;
 
@@ -164,7 +169,7 @@ namespace TinyEngine {
 		if (s_Data.QuadIndexCount == 0)
 			return; // Nothing to draw
 
-
+		// 填充完所有数据后, 最后统一调用drawcall
 		uint32_t dataSize = (uint32_t)((uint8_t*)s_Data.QuadVertexBufferPtr - (uint8_t*)s_Data.QuadVertexBufferBase);
 		s_Data.QuadVertexBuffer->SetData(s_Data.QuadVertexBufferBase, dataSize);
 
@@ -176,6 +181,7 @@ namespace TinyEngine {
 		s_Data.Stats.DrawCalls++;
 	}
 
+	// 配合处理异常合批
 	void Renderer2D::NextBatch()
 	{
 		Flush();
@@ -226,6 +232,7 @@ namespace TinyEngine {
 
 		for (size_t i = 0; i < quadVertexCount; i++)
 		{
+			// 在Vertex Buffer里填入四个顶点的Vertex Attributes数据
 			s_Data.QuadVertexBufferPtr->Position = transform * s_Data.QuadVertexPositions[i];
 			s_Data.QuadVertexBufferPtr->Color = color;
 			s_Data.QuadVertexBufferPtr->TexCoord = textureCoords[i];
@@ -254,6 +261,7 @@ namespace TinyEngine {
 		if (s_Data.QuadIndexCount >= Renderer2DData::MaxIndices)
 			NextBatch();
 
+		// 通过比较texture ID 来检查 s_Data.TextureSlots 中 texture 是否已经存在
 		float textureIndex = 0.0f;
 		for (uint32_t i = 1; i < s_Data.TextureSlotIndex; i++)
 		{
@@ -264,6 +272,7 @@ namespace TinyEngine {
 			}
 		}
 
+		// 如果不存在 那就加一个
 		if (textureIndex == 0.0f)
 		{
 			if (s_Data.TextureSlotIndex >= Renderer2DData::MaxTextureSlots)

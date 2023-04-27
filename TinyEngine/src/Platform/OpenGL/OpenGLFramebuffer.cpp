@@ -165,6 +165,7 @@ namespace TinyEngine {
 		glBindFramebuffer(GL_FRAMEBUFFER, 0);
 	}
 
+	// 绑定framebuffer时, 调整窗口的viewport跟framebuffer贴图大小一样
 	void OpenGLFramebuffer::Bind()
 	{
 		glBindFramebuffer(GL_FRAMEBUFFER, m_RendererID);

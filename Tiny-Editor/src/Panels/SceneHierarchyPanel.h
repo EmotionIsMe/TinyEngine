@@ -7,6 +7,7 @@
 
 namespace TinyEngine {
 
+	// SceneHierarchyPanel 把Scene里的Entity用Imgui绘制出来
 	class SceneHierarchyPanel
 	{
 	public:
@@ -15,7 +16,7 @@ namespace TinyEngine {
 
 		void SetContext(const Ref<Scene>& scene);
 
-		void OnImGuiRender();
+		void OnImGuiRender(); // 在EditorLayer里的OnImguiRender里调用它而已 
 
 		Entity GetSelectedEntity() const { return m_SelectionContext; }
 	private:
@@ -23,7 +24,7 @@ namespace TinyEngine {
 		void DrawComponents(Entity entity);
 	private:
 		Ref<Scene> m_Context;
-		Entity m_SelectionContext;
+		Entity m_SelectionContext;  // 代表Selected Entity
 	};
 
 }

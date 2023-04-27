@@ -10,6 +10,7 @@
 
 namespace TinyEngine {
 
+	// 创建一个TagComponent结构体
 	struct TagComponent
 	{
 		std::string Tag;
@@ -20,6 +21,7 @@ namespace TinyEngine {
 			: Tag(tag) {}
 	};
 
+	// 创建一个TransformComponent结构体
 	struct TransformComponent
 	{
 		glm::vec3 Translation = { 0.0f, 0.0f, 0.0f };
@@ -42,11 +44,10 @@ namespace TinyEngine {
 		}
 	};
 
-
+	// 创建一个SpriteRendererComponent结构体
 	struct SpriteRendererComponent
 	{
 		glm::vec4 Color{ 1.0f, 1.0f, 1.0f, 1.0f };
-
 
 		SpriteRendererComponent() = default;
 		SpriteRendererComponent(const SpriteRendererComponent&) = default;
@@ -54,6 +55,7 @@ namespace TinyEngine {
 			: Color(color) {}
 	};
 
+	// 创建一个CameraComponent结构体
 	struct CameraComponent
 	{
 		SceneCamera Camera;
@@ -64,6 +66,7 @@ namespace TinyEngine {
 		CameraComponent(const CameraComponent&) = default;
 	};
 
+	// 创建一个NativeScriptComponent结构体
 	struct NativeScriptComponent
 	{
 		ScriptableEntity* Instance = nullptr;

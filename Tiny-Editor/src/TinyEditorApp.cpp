@@ -5,6 +5,7 @@
 
 namespace TinyEngine {
 
+	// TinyEditor¿‡ ºÃ≥– Application¿‡
 	class TinyEditor : public Application
 	{
 	public:

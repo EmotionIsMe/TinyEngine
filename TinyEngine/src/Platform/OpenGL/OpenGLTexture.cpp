@@ -81,8 +81,10 @@ namespace TinyEngine {
 	{
 		TE_PROFILE_FUNCTION();
 
-		uint32_t bpp = m_DataFormat == GL_RGBA ? 4 : 3;
+		uint32_t bpp = m_DataFormat == GL_RGBA ? 4 : 3; // 默认是用RGBA的格式
 		TE_CORE_ASSERT(size == m_Width * m_Height * bpp, "Data must be entire texture!");
+		// 可以通过`glTextureSubImage2D`这个API，为Texture手动提供数据，创建这个WhiteTexture
+		// 注意这里的格式是GL_RGBA, 这是贴图的DataFormat
 		glTextureSubImage2D(m_RendererID, 0, 0, 0, m_Width, m_Height, m_DataFormat, GL_UNSIGNED_BYTE, data);
 	}
 

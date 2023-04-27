@@ -12,7 +12,7 @@ namespace TinyEngine {
 		LayerStack();
 		~LayerStack();
 		
-		void PushLayer(Layer* layer);
+		void PushLayer(Layer* layer);		//lay 代表普通的layer, Overlay代表离屏幕最远的layer
 		void PushOverlay(Layer* overlay);
 		void PopLayer(Layer* layer);
 		void PopOverlay(Layer* overlay);

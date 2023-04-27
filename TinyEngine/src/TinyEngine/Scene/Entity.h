@@ -13,6 +13,7 @@ namespace TinyEngine {
 		Entity(entt::entity handle, Scene* scene);
 		Entity(const Entity& other) = default;
 
+		// 给entity 添加 Component
 		template<typename T, typename... Args>
 		T& AddComponent(Args&&... args)
 		{
@@ -22,6 +23,7 @@ namespace TinyEngine {
 			return component;
 		}
 
+		// 从entity上获取 Component
 		template<typename T>
 		T& GetComponent()
 		{
@@ -29,12 +31,14 @@ namespace TinyEngine {
 			return m_Scene->m_Registry.get<T>(m_EntityHandle);
 		}
 
+		// 判断entity上是否有某个Component
 		template<typename T>
 		bool HasComponent()
 		{
 			return m_Scene->m_Registry.has<T>(m_EntityHandle);
 		}
 
+		// 从entity上删除 Component
 		template<typename T>
 		void RemoveComponent()
 		{

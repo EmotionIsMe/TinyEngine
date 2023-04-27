@@ -64,6 +64,7 @@ namespace TinyEngine {
 		SetVSync(true);
 
 		// Set GLFW callback
+		// 如果GLFW Event发生，则配置好Engine 的相关Event，可以回传到 Application::OnEvent
 		glfwSetWindowSizeCallback(m_Window, [](GLFWwindow* window, int width, int height) {
 
 			WindowData& data = *(WindowData*)glfwGetWindowUserPointer(window);
@@ -74,6 +75,7 @@ namespace TinyEngine {
 			data.EventCallback(event);
 		});
 
+		//当产生WindowCloseEvent时, 执行WindowsWindow类里记录的eventCallback这个函数指针对应的函数
 		glfwSetWindowCloseCallback(m_Window, [](GLFWwindow* window) {
 
 			WindowData& data = *(WindowData*)glfwGetWindowUserPointer(window);

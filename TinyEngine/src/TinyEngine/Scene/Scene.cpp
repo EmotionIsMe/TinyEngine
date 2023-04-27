@@ -18,8 +18,10 @@ namespace TinyEngine {
 	{
 	}
 
+	// 右键选择创建一个Entity的时候，会配置一个初始的TransformComponent 和 TagComponent
 	Entity Scene::CreateEntity(const std::string& name)
 	{
+		// m_Registry.create() 用于创建一个entity, entt::entity其实是uint32_t
 		Entity entity = { m_Registry.create(), this };
 		entity.AddComponent<TransformComponent>();
 		auto& tag = entity.AddComponent<TagComponent>();
@@ -27,11 +29,13 @@ namespace TinyEngine {
 		return entity;
 	}
 
+	// 销毁一个Entity
 	void Scene::DestroyEntity(Entity entity)
 	{
 		m_Registry.destroy(entity);
 	}
 
+	// 实时更新这个 Scene
 	void Scene::OnUpdateRuntime(Timestep ts)
 	{
 		// Update scripts
@@ -54,6 +58,7 @@ namespace TinyEngine {
 		Camera* mainCamera = nullptr;
 		glm::mat4 cameraTransform;
 		{
+			// 获取所有带有TransformComponent和CameraComponent的entity数组
 			auto view = m_Registry.view<TransformComponent, CameraComponent>();
 			for (auto entity : view)
 			{
@@ -70,13 +75,17 @@ namespace TinyEngine {
 
 		if (mainCamera)
 		{
+			// 重新写了一个BeginScene
 			Renderer2D::BeginScene(*mainCamera, cameraTransform);
 
+			// group用来获取同时满足拥有多个Component的Entity数组, 这里得到的group是
+			// m_Registry里所有既有TransformComponent又有SpriteRendererComponent的Entity数组
 			auto group = m_Registry.group<TransformComponent>(entt::get<SpriteRendererComponent>);
 			for (auto entity : group)
 			{
 				auto[transform, sprite] = group.get<TransformComponent, SpriteRendererComponent>(entity);
 
+				// 重新写了一个DrawQuad
 				Renderer2D::DrawQuad(transform.GetTransform(), sprite.Color);
 			}
 
@@ -84,8 +93,10 @@ namespace TinyEngine {
 		}
 	}
 
+	// 实时更新这个 Editor Scene
 	void Scene::OnUpdateEditor(Timestep ts, EditorCamera& camera)
 	{
+		// 重新写了一个BeginScene
 		Renderer2D::BeginScene(camera);
 
 		auto group = m_Registry.group<TransformComponent>(entt::get<SpriteRendererComponent>);

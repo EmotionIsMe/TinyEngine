@@ -22,9 +22,11 @@ namespace TinyEngine {
 	};
 
 	// Interface representing a desktop system based Window
-	class TE_API Window //窗口抽象类
+	class  Window //窗口抽象类
 	{
 	public:
+
+		// Window自带一个回调函数，用来处理从glfw库收到的callback
 		using EventCallbackFn = std::function<void(Event&)>;
 
 		virtual ~Window() {}
@@ -35,7 +37,7 @@ namespace TinyEngine {
 		virtual uint32_t GetHeight() const = 0;
 
 		// Window attributes
-		virtual void SetEventCallback(const EventCallbackFn& callback) = 0;//设置窗口事件回调,平台触发
+		virtual void SetEventCallback(const EventCallbackFn& callback) = 0;		//设置窗口事件回调,平台触发
 		virtual void SetVSync(bool enabled) = 0;
 		virtual bool IsVSync() const = 0;
 
