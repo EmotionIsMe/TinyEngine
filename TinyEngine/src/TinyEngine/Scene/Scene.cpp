@@ -86,7 +86,7 @@ namespace TinyEngine {
 				auto[transform, sprite] = group.get<TransformComponent, SpriteRendererComponent>(entity);
 
 				// 重新写了一个DrawQuad
-				Renderer2D::DrawQuad(transform.GetTransform(), sprite.Color);
+				Renderer2D::DrawSprite(transform.GetTransform(), sprite, (int)entity);
 			}
 
 			Renderer2D::EndScene();
@@ -104,7 +104,7 @@ namespace TinyEngine {
 		{
 			auto[transform, sprite] = group.get<TransformComponent, SpriteRendererComponent>(entity);
 
-			Renderer2D::DrawQuad(transform.GetTransform(), sprite.Color);
+			Renderer2D::DrawSprite(transform.GetTransform(), sprite, (int)entity);
 		}
 
 		Renderer2D::EndScene();

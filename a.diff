@@ -1,0 +1,211 @@
+diff --git a/Tiny-Editor/assets/shaders/Texture.glsl b/Tiny-Editor/assets/shaders/Texture.glsl
+index c277540..6362caa 100644
+--- a/Tiny-Editor/assets/shaders/Texture.glsl
++++ b/Tiny-Editor/assets/shaders/Texture.glsl
+@@ -8,6 +8,7 @@ layout(location = 1) in vec4 a_Color;
+ layout(location = 2) in vec2 a_TexCoord;
+ layout(location = 3) in float a_TexIndex;
+ layout(location = 4) in float a_TilingFactor;
++layout(location = 5) in int a_EntityID;
+ 
+ uniform mat4 u_ViewProjection;
+ 
+@@ -15,6 +16,7 @@ out vec4 v_Color;
+ out vec2 v_TexCoord;
+ out float v_TexIndex;
+ out float v_TilingFactor;
++out flat int v_EntityID;
+ 
+ void main()
+ {
+@@ -22,6 +24,7 @@ void main()
+ 	v_TexCoord = a_TexCoord;
+ 	v_TexIndex = a_TexIndex;
+ 	v_TilingFactor = a_TilingFactor;
++	v_EntityID = a_EntityID;
+ 	gl_Position = u_ViewProjection * vec4(a_Position, 1.0);
+ }
+ 
+@@ -35,6 +38,7 @@ in vec4 v_Color;
+ in vec2 v_TexCoord;
+ in float v_TexIndex;
+ in float v_TilingFactor;
++in flat int v_EntityID;
+ 
+ uniform sampler2D u_Textures[32];
+ 
+@@ -78,5 +82,5 @@ void main()
+ 	}
+ 	color = texColor;
+ 
+-	color2 = 50; // placeholder for our entity ID
++	color2 = v_EntityID;
+ }
+\ No newline at end of file
+diff --git a/Tiny-Editor/src/EditorLayer.cpp b/Tiny-Editor/src/EditorLayer.cpp
+index 4e88c6c..62b47e7 100644
+--- a/Tiny-Editor/src/EditorLayer.cpp
++++ b/Tiny-Editor/src/EditorLayer.cpp
+@@ -145,7 +145,7 @@ namespace TinyEngine {
+ 		if (mouseX >= 0 && mouseY >= 0 && mouseX < (int)viewportSize.x && mouseY < (int)viewportSize.y)
+ 		{
+ 			int pixelData = m_Framebuffer->ReadPixel(1, mouseX, mouseY);
+-			TE_CORE_WARN("Pixel data = {0}", pixelData);
++			m_HoveredEntity = pixelData == -1 ? Entity() : Entity((entt::entity)pixelData, m_ActiveScene.get());
+ 		}
+ 
+ 		m_Framebuffer->Unbind();
+@@ -234,6 +234,11 @@ namespace TinyEngine {
+ 		// 绘制RenderStats的代码
+ 		ImGui::Begin("Stats");
+ 
++		std::string name = "None";
++		if (m_HoveredEntity)
++			name = m_HoveredEntity.GetComponent<TagComponent>().Tag;
++		ImGui::Text("Hovered Entity: %s", name.c_str());
++
+ 		auto stats = Renderer2D::GetStats();
+ 		ImGui::Text("Renderer2D Stats:");
+ 		ImGui::Text("Draw Calls: %d", stats.DrawCalls);
+diff --git a/Tiny-Editor/src/EditorLayer.h b/Tiny-Editor/src/EditorLayer.h
+index abd33e8..20ff5df 100644
+--- a/Tiny-Editor/src/EditorLayer.h
++++ b/Tiny-Editor/src/EditorLayer.h
+@@ -41,6 +41,8 @@ namespace TinyEngine {
+ 		Entity m_CameraEntity;
+ 		Entity m_SecondCamera;
+ 
++		Entity m_HoveredEntity;
++
+ 		bool m_PrimaryCamera = true;
+ 
+ 		EditorCamera m_EditorCamera;
+diff --git a/TinyEngine/src/TinyEngine/Renderer/Renderer2D.cpp b/TinyEngine/src/TinyEngine/Renderer/Renderer2D.cpp
+index cc3f316..0b367cc 100644
+--- a/TinyEngine/src/TinyEngine/Renderer/Renderer2D.cpp
++++ b/TinyEngine/src/TinyEngine/Renderer/Renderer2D.cpp
+@@ -16,6 +16,9 @@ namespace TinyEngine {
+ 		glm::vec2 TexCoord;
+ 		float TexIndex;
+ 		float TilingFactor;
++
++		// Editor-only
++		int EntityID;
+ 	};
+ 
+ 	struct Renderer2DData
+@@ -58,7 +61,8 @@ namespace TinyEngine {
+ 			{ ShaderDataType::Float4, "a_Color" },
+ 			{ ShaderDataType::Float2, "a_TexCoord" },
+ 			{ ShaderDataType::Float, "a_TexIndex" },
+-			{ ShaderDataType::Float, "a_TilingFactor" }
++			{ ShaderDataType::Float, "a_TilingFactor" },
++			{ ShaderDataType::Int,   "a_EntityID" }
+ 			});
+ 		s_Data.QuadVertexArray->AddVertexBuffer(s_Data.QuadVertexBuffer);
+ 
+@@ -218,7 +222,7 @@ namespace TinyEngine {
+ 		DrawQuad(transform, texture, tilingFactor);
+ 	}
+ 
+-	void Renderer2D::DrawQuad(const glm::mat4& transform, const glm::vec4& color)
++	void Renderer2D::DrawQuad(const glm::mat4& transform, const glm::vec4& color, int entityID)
+ 	{
+ 		TE_PROFILE_FUNCTION();
+ 
+@@ -238,6 +242,7 @@ namespace TinyEngine {
+ 			s_Data.QuadVertexBufferPtr->TexCoord = textureCoords[i];
+ 			s_Data.QuadVertexBufferPtr->TexIndex = textureIndex;
+ 			s_Data.QuadVertexBufferPtr->TilingFactor = tilingFactor;
++			s_Data.QuadVertexBufferPtr->EntityID = entityID;
+ 			s_Data.QuadVertexBufferPtr++;
+ 		}
+ 
+@@ -251,7 +256,7 @@ namespace TinyEngine {
+ 		DrawRotatedQuad({ position.x, position.y, 0.0f }, size, rotation, color);
+ 	}
+ 
+-	void Renderer2D::DrawQuad(const glm::mat4& transform, const Ref<Texture2D>& texture, float tilingFactor, const glm::vec4& tintColor)
++	void Renderer2D::DrawQuad(const glm::mat4& transform, const Ref<Texture2D>& texture, float tilingFactor, const glm::vec4& tintColor, int entityID)
+ 	{
+ 		TE_PROFILE_FUNCTION();
+ 
+@@ -290,6 +295,7 @@ namespace TinyEngine {
+ 			s_Data.QuadVertexBufferPtr->TexCoord = textureCoords[i];
+ 			s_Data.QuadVertexBufferPtr->TexIndex = textureIndex;
+ 			s_Data.QuadVertexBufferPtr->TilingFactor = tilingFactor;
++			s_Data.QuadVertexBufferPtr->EntityID = entityID;
+ 			s_Data.QuadVertexBufferPtr++;
+ 		}
+ 
+@@ -383,6 +389,11 @@ namespace TinyEngine {
+ 		s_Data.Stats.QuadCount++;
+ 	}
+ 
++	void Renderer2D::DrawSprite(const glm::mat4& transform, SpriteRendererComponent& src, int entityID)
++	{
++		DrawQuad(transform, src.Color, entityID);
++	}
++
+ 	void Renderer2D::ResetStats()
+ 	{
+ 		memset(&s_Data.Stats, 0, sizeof(Statistics));
+diff --git a/TinyEngine/src/TinyEngine/Renderer/Renderer2D.h b/TinyEngine/src/TinyEngine/Renderer/Renderer2D.h
+index de794d9..bf64511 100644
+--- a/TinyEngine/src/TinyEngine/Renderer/Renderer2D.h
++++ b/TinyEngine/src/TinyEngine/Renderer/Renderer2D.h
+@@ -4,6 +4,7 @@
+ #include "TinyEngine/Renderer/Texture.h"
+ #include "TinyEngine/Renderer/Camera.h"
+ #include "TinyEngine/Renderer/EditorCamera.h"
++#include "TinyEngine/Scene/Components.h"
+ 
+ namespace TinyEngine {
+ 
+@@ -25,14 +26,16 @@ namespace TinyEngine {
+ 		static void DrawQuad(const glm::vec2& position, const glm::vec2& size, const Ref<Texture2D>& texture, float tilingFactor = 1.0f, const glm::vec4& tintColor = glm::vec4(1.0f));
+ 		static void DrawQuad(const glm::vec3& position, const glm::vec2& size, const Ref<Texture2D>& texture, float tilingFactor = 1.0f, const glm::vec4& tintColor = glm::vec4(1.0f));
+ 
+-		static void DrawQuad(const glm::mat4& transform, const glm::vec4& color);
+-		static void DrawQuad(const glm::mat4& transform, const Ref<Texture2D>& texture, float tilingFactor = 1.0f, const glm::vec4& tintColor = glm::vec4(1.0f));
++		static void DrawQuad(const glm::mat4& transform, const glm::vec4& color, int entityID = -1);
++		static void DrawQuad(const glm::mat4& transform, const Ref<Texture2D>& texture, float tilingFactor = 1.0f, const glm::vec4& tintColor = glm::vec4(1.0f), int entityID = -1);
+ 
+ 		static void DrawRotatedQuad(const glm::vec2& position, const glm::vec2& size, float rotation, const glm::vec4& color);
+ 		static void DrawRotatedQuad(const glm::vec3& position, const glm::vec2& size, float rotation, const glm::vec4& color);
+ 		static void DrawRotatedQuad(const glm::vec2& position, const glm::vec2& size, float rotation, const Ref<Texture2D>& texture, float tilingFactor = 1.0f, const glm::vec4& tintColor = glm::vec4(1.0f));
+ 		static void DrawRotatedQuad(const glm::vec3& position, const glm::vec2& size, float rotation, const Ref<Texture2D>& texture, float tilingFactor = 1.0f, const glm::vec4& tintColor = glm::vec4(1.0f));
+ 		
++		static void DrawSprite(const glm::mat4& transform, SpriteRendererComponent& src, int entityID);
++
+ 		// Stats
+ 		struct Statistics
+ 		{
+diff --git a/TinyEngine/src/TinyEngine/Scene/Scene.cpp b/TinyEngine/src/TinyEngine/Scene/Scene.cpp
+index c8ce686..9af6eab 100644
+--- a/TinyEngine/src/TinyEngine/Scene/Scene.cpp
++++ b/TinyEngine/src/TinyEngine/Scene/Scene.cpp
+@@ -86,7 +86,7 @@ namespace TinyEngine {
+ 				auto[transform, sprite] = group.get<TransformComponent, SpriteRendererComponent>(entity);
+ 
+ 				// 重新写了一个DrawQuad
+-				Renderer2D::DrawQuad(transform.GetTransform(), sprite.Color);
++				Renderer2D::DrawSprite(transform.GetTransform(), sprite, (int)entity);
+ 			}
+ 
+ 			Renderer2D::EndScene();
+@@ -104,7 +104,7 @@ namespace TinyEngine {
+ 		{
+ 			auto[transform, sprite] = group.get<TransformComponent, SpriteRendererComponent>(entity);
+ 
+-			Renderer2D::DrawQuad(transform.GetTransform(), sprite.Color);
++			Renderer2D::DrawSprite(transform.GetTransform(), sprite, (int)entity);
+ 		}
+ 
+ 		Renderer2D::EndScene();
+diff --git a/TinyEngine/vendor/ImGuizmo b/TinyEngine/vendor/ImGuizmo
+--- a/TinyEngine/vendor/ImGuizmo
++++ b/TinyEngine/vendor/ImGuizmo
+@@ -1 +1 @@
+-Subproject commit 218d60bde7d22061ac525d0d71e05360b4dcf978
++Subproject commit 218d60bde7d22061ac525d0d71e05360b4dcf978-dirty
