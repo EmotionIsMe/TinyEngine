@@ -1,13 +1,17 @@
 # Binaries
 **/bin/
+!vendor/bin/premake/
 bin-int/
-
 # TinyEngine files
 *.log
-
 # Visual Studio files and folder
 .vs/
 **.sln
 **.vcxproj
 **.vcxproj.filters
 **.vcxproj.user
+
+# Directories
+TinyEngine/vendor/VulkanSDK
+Tiny-Editor/assets/cache
+scripts/__pycache__

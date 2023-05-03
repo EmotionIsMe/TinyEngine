@@ -3,9 +3,11 @@
 
 #include "TinyEngine/Renderer/VertexArray.h"
 #include "TinyEngine/Renderer/Shader.h"
+#include "TinyEngine/Renderer/UniformBuffer.h"
 #include "TinyEngine/Renderer/RenderCommand.h"
 
 #include <glm/gtc/matrix_transform.hpp>
+#include <glm/gtc/type_ptr.hpp>
 
 namespace TinyEngine {
 
@@ -45,6 +47,13 @@ namespace TinyEngine {
 		glm::vec4 QuadVertexPositions[4];
 
 		Renderer2D::Statistics Stats;
+
+		struct CameraData
+		{
+			glm::mat4 ViewProjection;
+		};
+		CameraData CameraBuffer;
+		Ref<UniformBuffer> CameraUniformBuffer;
 	};
 
 	static Renderer2DData s_Data;
@@ -97,10 +106,6 @@ namespace TinyEngine {
 			samplers[i] = i;
 
 		s_Data.TextureShader = Shader::Create("assets/shaders/Texture.glsl");
-		s_Data.TextureShader->Bind();
-		
-		// 向GPU里面传入了一个texture 相关的数组，最终绘制纹理的时候是通过这个数组的索引进行绘制的
-		s_Data.TextureShader->SetIntArray("u_Textures", samplers, s_Data.MaxTextureSlots);
 
 		// Set all texture slots to 0
 		s_Data.TextureSlots[0] = s_Data.WhiteTexture;
@@ -109,6 +114,7 @@ namespace TinyEngine {
 		s_Data.QuadVertexPositions[1] = { 0.5f, -0.5f, 0.0f, 1.0f };
 		s_Data.QuadVertexPositions[2] = { 0.5f,  0.5f, 0.0f, 1.0f };
 		s_Data.QuadVertexPositions[3] = { -0.5f,  0.5f, 0.0f, 1.0f };
+		s_Data.CameraUniformBuffer = UniformBuffer::Create(sizeof(Renderer2DData::CameraData), 0);
 	}
 
 	void Renderer2D::Shutdown()
@@ -132,10 +138,8 @@ namespace TinyEngine {
 	{
 		TE_PROFILE_FUNCTION();
 
-		glm::mat4 viewProj = camera.GetProjection() * glm::inverse(transform);
-
-		s_Data.TextureShader->Bind();
-		s_Data.TextureShader->SetMat4("u_ViewProjection", viewProj);
+		s_Data.CameraBuffer.ViewProjection = camera.GetProjection() * glm::inverse(transform);
+		s_Data.CameraUniformBuffer->SetData(&s_Data.CameraBuffer, sizeof(Renderer2DData::CameraData));
 
 		StartBatch();
 	}
@@ -144,10 +148,8 @@ namespace TinyEngine {
 	{
 		TE_PROFILE_FUNCTION();
 
-		glm::mat4 viewProj = camera.GetViewProjection();
-
-		s_Data.TextureShader->Bind();
-		s_Data.TextureShader->SetMat4("u_ViewProjection", viewProj);
+		s_Data.CameraBuffer.ViewProjection = camera.GetViewProjection();
+		s_Data.CameraUniformBuffer->SetData(&s_Data.CameraBuffer, sizeof(Renderer2DData::CameraData));
 
 		StartBatch();
 	}
@@ -181,6 +183,7 @@ namespace TinyEngine {
 		for (uint32_t i = 0; i < s_Data.TextureSlotIndex; i++)
 			s_Data.TextureSlots[i]->Bind(i);
 
+		s_Data.TextureShader->Bind();
 		RenderCommand::DrawIndexed(s_Data.QuadVertexArray, s_Data.QuadIndexCount);
 		s_Data.Stats.DrawCalls++;
 	}

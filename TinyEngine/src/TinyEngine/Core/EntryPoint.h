@@ -2,16 +2,18 @@
 
 #include "tepch.h"
 
+#include "TinyEngine/Core/Application.h"
+
 #ifdef TE_PLATFORM_WINDOWS
 
-extern  TinyEngine::Application*  TinyEngine::CreateApplication();
+extern TinyEngine::Application* TinyEngine::CreateApplication(ApplicationCommandLineArgs args);
 
-int main() {
+int main(int argc, char** argv) {
 
 	TinyEngine::Log::Init();
 
 	TE_PROFILE_BEGIN_SESSION("Startup", "TinyEngineProfile-Startup.json");
-	auto app = TinyEngine::CreateApplication();
+	auto app = TinyEngine::CreateApplication({ argc, argv });
 	TE_PROFILE_END_SESSION();
 
 	TE_PROFILE_BEGIN_SESSION("Runtime", "TinyEngineProfile-Runtime.json");

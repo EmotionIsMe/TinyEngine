@@ -16,7 +16,8 @@ namespace TinyEngine {
 
 	Application* Application::s_Instace = nullptr;
 
-	Application::Application(const std::string& name)
+	Application::Application(const std::string& name, ApplicationCommandLineArgs args)
+		: m_CommandLineArgs(args)
 	{
 		TE_PROFILE_FUNCTION();
 

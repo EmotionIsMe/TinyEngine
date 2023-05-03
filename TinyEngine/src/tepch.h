@@ -12,6 +12,7 @@
 #include <unordered_set>
 #include <array>
 #include <stdio.h>
+#include <filesystem>
 /*    log        */
 #include "TinyEngine/Core/Log.h"
 

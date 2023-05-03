@@ -32,6 +32,14 @@ namespace TinyEngine {
 		// 创建一个活动的Scene  这个Scene 又可以有多个Entity
 		m_ActiveScene = CreateRef<Scene>();
 
+		auto commandLineArgs = Application::Get().GetCommandLineArgs();
+		if (commandLineArgs.Count > 1)
+		{
+			auto sceneFilePath = commandLineArgs[1];
+			SceneSerializer serializer(m_ActiveScene);
+			serializer.Deserialize(sceneFilePath);
+		}
+
 		m_EditorCamera = EditorCamera(30.0f, 1.778f, 0.1f, 1000.0f);
 
 #if 0
@@ -343,6 +351,7 @@ namespace TinyEngine {
 
 		EventDispatcher dispatcher(e);
 		dispatcher.Dispatch<KeyPressedEvent>(TE_BIND_EVENT_FN(EditorLayer::OnKeyPressed));
+		dispatcher.Dispatch<MouseButtonPressedEvent>(TE_BIND_EVENT_FN(EditorLayer::OnMouseButtonPressed));
 	}
 
 	bool EditorLayer::OnKeyPressed(KeyPressedEvent& e)
@@ -403,6 +412,16 @@ namespace TinyEngine {
 				break;
 			}
 		}
+	}
+
+	bool EditorLayer::OnMouseButtonPressed(MouseButtonPressedEvent& e)
+	{
+		if (e.GetMouseButton() == Mouse::ButtonLeft)
+		{
+			if (m_ViewportHovered && !ImGuizmo::IsOver() && !Input::IsKeyPressed(Key::LeftAlt))
+				m_SceneHierarchyPanel.SetSelectedEntity(m_HoveredEntity);
+		}
+		return false;
 	}
 
 	// 新建一个scene

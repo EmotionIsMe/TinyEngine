@@ -1,5 +1,6 @@
 workspace "TinyEngine" --解决方案名称
     architecture "x64" --编译平台 只编64位--(x86,x86_64,ARM)
+	startproject "Tiny-Editor"
 
     configurations 
     {
@@ -11,6 +12,8 @@ workspace "TinyEngine" --解决方案名称
 --详细的所有支持的tokens 可参考 [https://github.com/premake/premake-core/wiki/Tokens]
 outputdir = "%{cfg.buildcfg}-%{cfg.system}-%{cfg.architecture}"
 
+VULKAN_SDK = os.getenv("VULKAN_SDK")
+
 --include directory relative to root folder
 IncludeDir = {}
 IncludeDir ["GLFW"] = "TinyEngine/vendor/GLFW/include" 
@@ -21,6 +24,13 @@ IncludeDir["stb_image"] = "TinyEngine/vendor/stb_image"
 IncludeDir["entt"] = "TinyEngine/vendor/entt/include"
 IncludeDir["yaml_cpp"] = "TinyEngine/vendor/yaml-cpp/include"
 IncludeDir["ImGuizmo"] = "TinyEngine/vendor/ImGuizmo"
+IncludeDir["shaderc"] = "TinyEngine/vendor/shaderc/include"
+IncludeDir["SPIRV_Cross"] = "TinyEngine/vendor/SPIRV-Cross"
+IncludeDir["VulkanSDK"] = "%{VULKAN_SDK}/Include"
+
+Library = {}
+Library["VulkanSDK_release"] = "%{VULKAN_SDK}/Lib"
+Library["VulkanSDK_debug"] = "TinyEngine/vendor/VulkanSDK/Lib"
 
 group "Dependencies"
 	include "TinyEngine/vendor/GLFW"
@@ -34,7 +44,7 @@ project "TinyEngine" --项目名称
     kind "StaticLib" --表明该项目是静态库
     language "c++"   --指定语言是c++
 	cppdialect "C++17"
-	staticruntime "on"
+	staticruntime "off"
 
     targetdir ("bin/" .. outputdir .. "/%{prj.name}")--输出目录
     objdir ("bin-int/" .. outputdir .. "/%{prj.name}")--中间临时文件的目录
@@ -56,7 +66,8 @@ project "TinyEngine" --项目名称
 	
 	defines
 	{
-		"_CRT_SECURE_NO_WARNINGS"
+		"_CRT_SECURE_NO_WARNINGS",
+		"YAML_CPP_STATIC_DEFINE"
 	}
 
     includedirs--附加包含目录
@@ -70,7 +81,8 @@ project "TinyEngine" --项目名称
 		"%{IncludeDir.stb_image}",
 		"%{IncludeDir.entt}",
 		"%{IncludeDir.yaml_cpp}",
-		"%{IncludeDir.ImGuizmo}"
+		"%{IncludeDir.ImGuizmo}",
+		"%{IncludeDir.VulkanSDK}"
     }
 	
 	links
@@ -99,23 +111,59 @@ project "TinyEngine" --项目名称
         defines "TE_DEBUG"
         runtime "Debug"
         symbols "on"
+		
+		libdirs
+		{
+			"%{VULKAN_SDK}/Lib"
+		}
+		
+		links
+		{
+			"shaderc_sharedd.lib",
+			"spirv-cross-cored.lib",
+			"spirv-cross-glsld.lib"
+		}
 
     filter "configurations:Release"
         defines "TE_RELEASE"
         runtime "Release"
         optimize "on"
+		
+		libdirs
+		{
+			"%{VULKAN_SDK}/Lib"
+		}
+		
+		links
+		{
+			"shaderc_shared.lib",
+			"spirv-cross-core.lib",
+			"spirv-cross-glsl.lib"
+		}
 
     filter "configurations:Dist"
         defines "TE_DIST"
         runtime "Release"
         optimize "on"
+		
+		libdirs
+		{
+			"%{VULKAN_SDK}/Lib"
+		}
+		
+		links
+		{
+			"shaderc_shared.lib",
+			"spirv-cross-core.lib",
+			"spirv-cross-glsl.lib"
+		}
 
 project "Sandbox"
     location "Sandbox"
     kind "ConsoleApp"
     language "c++"
 	cppdialect "C++17"
-	staticruntime "on"
+	staticruntime "off"
 
     targetdir ("bin/" .. outputdir .. "/%{prj.name}")
     objdir ("bin-int/" .. outputdir .. "/%{prj.name}")
@@ -170,7 +218,7 @@ project "Tiny-Editor"
     kind "ConsoleApp"
     language "c++"
 	cppdialect "C++17"
-	staticruntime "on"
+	staticruntime "off"
 
     targetdir ("bin/" .. outputdir .. "/%{prj.name}")
     objdir ("bin-int/" .. outputdir .. "/%{prj.name}")
