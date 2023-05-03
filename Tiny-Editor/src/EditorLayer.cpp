@@ -239,6 +239,7 @@ namespace TinyEngine {
 		}
 
 		m_SceneHierarchyPanel.OnImGuiRender();
+		m_ContentBrowserPanel.OnImGuiRender();
 
 		// »æÖÆRenderStatsµÄ´úÂë
 		ImGui::Begin("Stats");
