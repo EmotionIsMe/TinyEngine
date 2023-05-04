@@ -1,6 +1,7 @@
 #pragma once
 
 #include <filesystem>
+#include "TinyEngine/Renderer/Texture.h"
 
 namespace TinyEngine {
 
@@ -12,6 +13,9 @@ namespace TinyEngine {
 		void OnImGuiRender();
 	private:
 		std::filesystem::path m_CurrentDirectory;
+
+		Ref<Texture2D> m_DirectoryIcon;
+		Ref<Texture2D> m_FileIcon;
 	};
 
 }
