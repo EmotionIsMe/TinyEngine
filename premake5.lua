@@ -16,27 +16,29 @@ VULKAN_SDK = os.getenv("VULKAN_SDK")
 
 --include directory relative to root folder
 IncludeDir = {}
+IncludeDir ["Box2D"] = "TinyEngine/vendor/Box2D/include"
 IncludeDir ["GLFW"] = "TinyEngine/vendor/GLFW/include" 
 IncludeDir ["Glad"] = "TinyEngine/vendor/GLAD/include" 
 IncludeDir ["ImGui"] = "TinyEngine/vendor/imgui" 
-IncludeDir["glm"] = "TinyEngine/vendor/glm"
-IncludeDir["stb_image"] = "TinyEngine/vendor/stb_image"
-IncludeDir["entt"] = "TinyEngine/vendor/entt/include"
-IncludeDir["yaml_cpp"] = "TinyEngine/vendor/yaml-cpp/include"
-IncludeDir["ImGuizmo"] = "TinyEngine/vendor/ImGuizmo"
-IncludeDir["shaderc"] = "TinyEngine/vendor/shaderc/include"
-IncludeDir["SPIRV_Cross"] = "TinyEngine/vendor/SPIRV-Cross"
-IncludeDir["VulkanSDK"] = "%{VULKAN_SDK}/Include"
+IncludeDir ["glm"] = "TinyEngine/vendor/glm"
+IncludeDir ["stb_image"] = "TinyEngine/vendor/stb_image"
+IncludeDir ["entt"] = "TinyEngine/vendor/entt/include"
+IncludeDir ["yaml_cpp"] = "TinyEngine/vendor/yaml-cpp/include"
+IncludeDir ["ImGuizmo"] = "TinyEngine/vendor/ImGuizmo"
+IncludeDir ["shaderc"] = "TinyEngine/vendor/shaderc/include"
+IncludeDir ["SPIRV_Cross"] = "TinyEngine/vendor/SPIRV-Cross"
+IncludeDir ["VulkanSDK"] = "%{VULKAN_SDK}/Include"
 
 Library = {}
-Library["VulkanSDK_release"] = "%{VULKAN_SDK}/Lib"
-Library["VulkanSDK_debug"] = "TinyEngine/vendor/VulkanSDK/Lib"
+Library ["VulkanSDK_release"] = "%{VULKAN_SDK}/Lib"
+Library ["VulkanSDK_debug"] = "TinyEngine/vendor/VulkanSDK/Lib"
 
 group "Dependencies"
 	include "TinyEngine/vendor/GLFW"
 	include "TinyEngine/vendor/Glad"
 	include "TinyEngine/vendor/imgui"
 	include "TinyEngine/vendor/yaml-cpp"
+    include "TinyEngine/vendor/Box2D"
 group ""
 
 project "TinyEngine" --项目名称
@@ -74,6 +76,7 @@ project "TinyEngine" --项目名称
     {
 		"%{prj.name}/src/",
         "%{prj.name}/vendor/spdlog/include",
+        "%{IncludeDir.Box2D}",
 		"%{IncludeDir.GLFW}",
 		"%{IncludeDir.Glad}",
 		"%{IncludeDir.ImGui}",
@@ -87,6 +90,7 @@ project "TinyEngine" --项目名称
 	
 	links
     {
+        "Box2D",
         "GLFW",
 		"Glad",
 		"ImGui",

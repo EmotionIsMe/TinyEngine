@@ -16,3 +16,6 @@
 [submodule "TinyEngine/vendor/ImGuizmo"]
 	path = TinyEngine/vendor/ImGuizmo
 	url = https://github.com/TheCherno/ImGuizmo.git
+[submodule "TinyEngine/vendor/Box2D"]
+	path = TinyEngine/vendor/Box2D
+	url = https://github.com/TheCherno/box2d.git
