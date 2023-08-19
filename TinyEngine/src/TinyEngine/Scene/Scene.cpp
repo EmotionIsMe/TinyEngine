@@ -2,6 +2,7 @@
 #include "Scene.h"
 
 #include "Components.h"
+#include "ScriptableEntity.h"
 #include "TinyEngine/Renderer/Renderer2D.h"
 
 #include <glm/glm.hpp>
@@ -38,7 +39,12 @@ namespace TinyEngine {
 	}
 
 	// 右键选择创建一个Entity的时候，会配置一个初始的TransformComponent 和 TagComponent
-	Entity Scene::CreateEntity(const std::string& name)
+	Entity Scene::CreateEntity(const std::string& name) 
+	{
+		return CreateEntityWithUUID(UUID(), name);
+	}
+
+	Entity Scene::CreateEntityWithUUID(UUID uuid, const std::string& name)
 	{
 		// m_Registry.create() 用于创建一个entity, entt::entity其实是uint32_t
 		Entity entity = { m_Registry.create(), this };
@@ -237,6 +243,11 @@ namespace TinyEngine {
 	void Scene::OnComponentAdded(Entity entity, T& component)
 	{
 		static_assert(false);
+	}
+
+	template<>
+	void Scene::OnComponentAdded<IDComponent>(Entity entity, IDComponent& component)
+	{
 	}
 
 	template<>

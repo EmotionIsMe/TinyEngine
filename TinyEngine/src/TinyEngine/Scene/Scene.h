@@ -1,6 +1,7 @@
 #pragma once
 
 #include "TinyEngine/Core/Timestep.h"
+#include "TinyEngine/Core/UUID.h"
 #include "TinyEngine/Renderer/EditorCamera.h"
 
 #include "entt.hpp"
@@ -18,6 +19,7 @@ namespace TinyEngine {
 		~Scene();
 
 		Entity CreateEntity(const std::string& name = std::string());
+		Entity CreateEntityWithUUID(UUID uuid, const std::string& name = std::string());
 		void DestroyEntity(Entity entity);
 
         void OnRuntimeStart();

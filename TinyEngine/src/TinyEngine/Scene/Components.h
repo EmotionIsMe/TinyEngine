@@ -1,15 +1,24 @@
 #pragma once
+
+#include "SceneCamera.h"
+#include "TinyEngine/Core/UUID.h"
+#include "TinyEngine/Renderer/Texture.h"
+
 #include <glm/glm.hpp>
 #include <glm/gtc/matrix_transform.hpp>
 
 #define GLM_ENABLE_EXPERIMENTAL
 #include <glm/gtx/quaternion.hpp>
 
-#include "SceneCamera.h"
-#include "ScriptableEntity.h"
-#include "TinyEngine/Renderer/Texture.h"
-
 namespace TinyEngine {
+
+	struct IDComponent
+	{
+		UUID ID;
+
+		IDComponent() = default;
+		IDComponent(const IDComponent&) = default;
+	};
 
 	// 创建一个TagComponent结构体
 	struct TagComponent
@@ -68,6 +77,9 @@ namespace TinyEngine {
 		CameraComponent() = default;
 		CameraComponent(const CameraComponent&) = default;
 	};
+
+	// Forward declaration
+	class ScriptableEntity;
 
 	// 创建一个NativeScriptComponent结构体
 	struct NativeScriptComponent
