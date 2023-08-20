@@ -139,4 +139,22 @@ namespace TinyEngine {
         BoxCollider2DComponent() = default;
         BoxCollider2DComponent(const BoxCollider2DComponent&) = default;
     };
+
+	struct CircleCollider2DComponent
+	{
+		glm::vec2 Offset = { 0.0f, 0.0f };
+		float Radius = 0.5f;
+
+		// TODO:移到物理材质
+		float Density = 1.0f;					// 密度,0是静态的物理
+		float Friction = 0.5f;					// 摩擦力
+		float Restitution = 0.0f;				// 弹力，0不会弹跳，1无限弹跳
+		float RestitutionThreshold = 0.5f;		// 复原速度阈值，超过这个速度的碰撞就会被恢复原状（会反弹）。
+
+		//  运行时候由于物理，每一帧的上述参数可能会变，所以保存为对象,但未使用
+		void* RuntimeFixture = nullptr;
+
+		CircleCollider2DComponent() = default;
+		CircleCollider2DComponent(const CircleCollider2DComponent&) = default;
+	};
 }

@@ -14,6 +14,7 @@
 #include "box2d/b2_body.h"
 #include "box2d/b2_fixture.h"
 #include "box2d/b2_polygon_shape.h"
+#include "box2d/b2_circle_shape.h"
 
 namespace TinyEngine {
 
@@ -89,6 +90,7 @@ namespace TinyEngine {
 		CopyComponent<NativeScriptComponent>(dstSceneRegistry, srcSceneRegistry, enttMap);
 		CopyComponent<Rigidbody2DComponent>(dstSceneRegistry, srcSceneRegistry, enttMap);
 		CopyComponent<BoxCollider2DComponent>(dstSceneRegistry, srcSceneRegistry, enttMap);
+		CopyComponent<CircleCollider2DComponent>(dstSceneRegistry, srcSceneRegistry, enttMap);
 
 		return newScene;
 	}
@@ -158,6 +160,26 @@ namespace TinyEngine {
 				// 3.3定义主体的fixture
                 body->CreateFixture(&fixtureDef);
             }
+
+			if (entity.HasComponent<CircleCollider2DComponent>())
+			{
+				auto& cc2d = entity.GetComponent<CircleCollider2DComponent>();
+
+				// 定义圆形包围盒
+				b2CircleShape circleShape;
+				circleShape.m_p.Set(cc2d.Offset.x, cc2d.Offset.y);
+				circleShape.m_radius = cc2d.Radius;
+
+				// 定义fixture，fixture包含定义的包围盒
+				b2FixtureDef fixtureDef;
+				fixtureDef.shape = &circleShape;
+				fixtureDef.density = cc2d.Density;
+				fixtureDef.friction = cc2d.Friction;
+				fixtureDef.restitution = cc2d.Restitution;
+				fixtureDef.restitutionThreshold = cc2d.RestitutionThreshold;
+				// 定义主体的fixture
+				body->CreateFixture(&fixtureDef);
+			}
         }
     }
 
@@ -207,8 +229,9 @@ namespace TinyEngine {
                 const auto& position = body->GetPosition();
                 transform.Translation.x = position.x;
                 transform.Translation.y = position.y;
-                transform.Rotation.z = body->GetAngle();
+                transform.Rotation.z = body->GetAngle();	// 获取z轴角度
             }
+			// 脚本影响Pyhsics再下面渲染出来
         }
 
 		// Render 2D
@@ -320,6 +343,7 @@ namespace TinyEngine {
 		CopyComponentIfExists<NativeScriptComponent>(newEntity, entity);
 		CopyComponentIfExists<Rigidbody2DComponent>(newEntity, entity);
 		CopyComponentIfExists<BoxCollider2DComponent>(newEntity, entity);
+		CopyComponentIfExists<CircleCollider2DComponent>(newEntity, entity);
 	}
 
 
@@ -387,4 +411,9 @@ namespace TinyEngine {
     void Scene::OnComponentAdded<BoxCollider2DComponent>(Entity entity, BoxCollider2DComponent& component)
     {
     }
+
+	template<>
+	void Scene::OnComponentAdded<CircleCollider2DComponent>(Entity entity, CircleCollider2DComponent& component)
+	{
+	}
 }
