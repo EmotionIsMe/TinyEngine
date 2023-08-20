@@ -7,7 +7,7 @@
 #version 450 core
 
 layout(location = 0) in vec3 a_WorldPosition;
-layout(location = 1) in vec3 a_LocalPosition;
+layout(location = 1) in vec3 a_LocalPosition;	// 具有**localposition**顶点属性
 layout(location = 2) in vec4 a_Color;
 layout(location = 3) in float a_Thickness;
 layout(location = 4) in float a_Fade;
@@ -20,7 +20,7 @@ layout(std140, binding = 0) uniform Camera
 
 struct VertexOutput
 {
-	vec3 LocalPosition;
+	vec3 LocalPosition;							// 输出这个为了不管处于任何世界坐标，相对于圆心的长度不变
 	vec4 Color;
 	float Thickness;
 	float Fade;
