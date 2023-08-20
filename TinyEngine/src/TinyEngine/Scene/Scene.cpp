@@ -168,7 +168,7 @@ namespace TinyEngine {
 				// 定义圆形包围盒
 				b2CircleShape circleShape;
 				circleShape.m_p.Set(cc2d.Offset.x, cc2d.Offset.y);
-				circleShape.m_radius = cc2d.Radius;
+				circleShape.m_radius = transform.Scale.x * cc2d.Radius;
 
 				// 定义fixture，fixture包含定义的包围盒
 				b2FixtureDef fixtureDef;
