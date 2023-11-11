@@ -108,7 +108,6 @@ namespace TinyEngine {
 	};
 
     // Physics
-
     struct Rigidbody2DComponent
     {
         enum class BodyType { Static = 0, Dynamic, Kinematic };
@@ -157,4 +156,15 @@ namespace TinyEngine {
 		CircleCollider2DComponent() = default;
 		CircleCollider2DComponent(const CircleCollider2DComponent&) = default;
 	};
+
+	template<typename... Component>
+	struct ComponentGroup
+	{
+	};
+
+	using AllComponents =
+		ComponentGroup<TransformComponent, SpriteRendererComponent,
+		CircleRendererComponent, CameraComponent, NativeScriptComponent,
+		Rigidbody2DComponent, BoxCollider2DComponent, CircleCollider2DComponent>;
+
 }
