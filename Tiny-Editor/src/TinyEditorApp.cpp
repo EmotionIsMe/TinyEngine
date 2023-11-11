@@ -14,10 +14,6 @@ namespace TinyEngine {
 		{
 			PushLayer(new EditorLayer());
 		}
-
-		~TinyEditor()
-		{
-		}
 	};
 
 	Application* CreateApplication(ApplicationCommandLineArgs args)
