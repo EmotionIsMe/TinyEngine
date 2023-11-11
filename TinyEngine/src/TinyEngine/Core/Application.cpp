@@ -16,15 +16,19 @@ namespace TinyEngine {
 
 	Application* Application::s_Instace = nullptr;
 
-	Application::Application(const std::string& name, ApplicationCommandLineArgs args)
-		: m_CommandLineArgs(args)
+	Application::Application(const ApplicationSpecification& specification)
+		: m_Specification(specification)
 	{
 		TE_PROFILE_FUNCTION();
 
 		TE_CORE_ASSERT(!s_Instace, "Application already exists");
 		s_Instace = this;
 
-		m_Window = Window::Create(WindowProps(name));
+		// Set working directory here
+		if (!m_Specification.WorkingDirectory.empty())
+			std::filesystem::current_path(m_Specification.WorkingDirectory);
+
+		m_Window = Window::Create(WindowProps(m_Specification.Name));
 
 		// 这里会设置m_Window里的std::function<void(Event&)>对象, 当接受Event时, 会调用Application::OnEvent函数
 		m_Window->SetEventCallback(BIND_EVENT_FN(onEvent));	// 设置window的callback为此对象的OnEvent函数

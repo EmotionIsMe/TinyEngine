@@ -9,8 +9,8 @@ namespace TinyEngine {
 	class TinyEditor : public Application
 	{
 	public:
-		TinyEditor(ApplicationCommandLineArgs args)
-			: Application("TinyEditor", args)
+		TinyEditor(const ApplicationSpecification& spec)
+			: Application(spec)
 		{
 			PushLayer(new EditorLayer());
 		}
@@ -22,7 +22,11 @@ namespace TinyEngine {
 
 	Application* CreateApplication(ApplicationCommandLineArgs args)
 	{
-		return new TinyEditor(args);
+		ApplicationSpecification spec;
+		spec.Name = "TinyEditor";
+		spec.CommandLineArgs = args;
+
+		return new TinyEditor(spec);
 	}
 
 }

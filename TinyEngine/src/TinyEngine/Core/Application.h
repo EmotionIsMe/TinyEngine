@@ -27,12 +27,19 @@ namespace TinyEngine {
 		}
 	};
 
+	struct ApplicationSpecification {
+		std::string Name = "Game Engine Application"; // 默认运行程序名称
+		std::string WorkingDirectory;				// 工作目录
+		ApplicationCommandLineArgs CommandLineArgs;
+
+	};
+
 	// 创建一个Application类代表游戏基类
 	// 一个游戏只需要有一个LayerStack，用于存放多个Layer
 	class  Application
 	{
 	public:
-		Application(const std::string& name = "TinyEngine App", ApplicationCommandLineArgs args = ApplicationCommandLineArgs());
+		Application(const ApplicationSpecification& specification);
 		virtual ~Application();
 		
 		void Run();
@@ -48,14 +55,14 @@ namespace TinyEngine {
 		inline static Application& Get() { return *s_Instace; }
 		inline Window& GetWindow() { return  *m_Window; }
 
-		ApplicationCommandLineArgs GetCommandLineArgs() const { return m_CommandLineArgs; }
+		const ApplicationSpecification& GetSpecification() const { return m_Specification; }
 
 	private:
 		bool OnWindowClose(WindowCloseEvent& e);
 		bool OnWindowResize(WindowResizeEvent& e);
 
 	private:
-		ApplicationCommandLineArgs m_CommandLineArgs;
+		ApplicationSpecification m_Specification;
 		std::unique_ptr<Window> m_Window;
 		ImGuiLayer* m_ImGuiLayer;
 		bool m_Running = true;

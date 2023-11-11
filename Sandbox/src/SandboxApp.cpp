@@ -196,9 +196,9 @@ public:
 class Sandbox : public TinyEngine::Application
 {
 public:
-	Sandbox() 
-		:Application("Sandbox Editor") {
-
+	Sandbox(const TinyEngine::ApplicationSpecification& specification)
+		: TinyEngine::Application(specification)
+	{
 		// PushLayer(new ExampleLayer());
 		PushLayer(new Sandbox2D());
 	}
@@ -206,11 +206,14 @@ public:
 
 	}
 
-private:
-
 };
 
-TinyEngine::Application*  TinyEngine::CreateApplication() {
-	
-	return new Sandbox();
+TinyEngine::Application* TinyEngine::CreateApplication(TinyEngine::ApplicationCommandLineArgs args)
+{
+	ApplicationSpecification spec;
+	spec.Name = "Sandbox";
+	spec.WorkingDirectory = "../Hazelnut";
+	spec.CommandLineArgs = args;
+
+	return new Sandbox(spec);
 }
