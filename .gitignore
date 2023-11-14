@@ -11,6 +11,7 @@ Intermediates/
 **.vcxproj
 **.vcxproj.filters
 **.vcxproj.user
+**.csproj
 
 # Directories
 TinyEngine/vendor/VulkanSDK
