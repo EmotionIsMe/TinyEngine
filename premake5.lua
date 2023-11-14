@@ -23,6 +23,7 @@ IncludeDir ["ImGui"] = "TinyEngine/vendor/imgui"
 IncludeDir ["glm"] = "TinyEngine/vendor/glm"
 IncludeDir ["stb_image"] = "TinyEngine/vendor/stb_image"
 IncludeDir ["entt"] = "TinyEngine/vendor/entt/include"
+IncludeDir["mono"] = "TinyEngine/vendor/mono/include"
 IncludeDir ["yaml_cpp"] = "TinyEngine/vendor/yaml-cpp/include"
 IncludeDir ["ImGuizmo"] = "TinyEngine/vendor/ImGuizmo"
 IncludeDir ["shaderc"] = "TinyEngine/vendor/shaderc/include"
@@ -32,6 +33,13 @@ IncludeDir ["VulkanSDK"] = "%{VULKAN_SDK}/Include"
 Library = {}
 Library ["VulkanSDK_release"] = "%{VULKAN_SDK}/Lib"
 Library ["VulkanSDK_debug"] = "TinyEngine/vendor/VulkanSDK/Lib"
+Library ["mono"] = "vendor/mono/lib/%{cfg.buildcfg}/libmono-static-sgen.lib"
+
+--Windows
+Library ["WinSock"] = "Ws2_32.lib"
+Library ["WinMM"] = "Winmm.lib"
+Library ["WinVersion"] = "Version.lib"
+Library ["BCrypt"] = "Bcrypt.lib"
 
 group "Dependencies"
 	include "TinyEngine/vendor/GLFW"
@@ -83,6 +91,7 @@ project "TinyEngine" --项目名称
 		"%{IncludeDir.glm}",
 		"%{IncludeDir.stb_image}",
 		"%{IncludeDir.entt}",
+		"%{IncludeDir.mono}",
 		"%{IncludeDir.yaml_cpp}",
 		"%{IncludeDir.ImGuizmo}",
 		"%{IncludeDir.VulkanSDK}"
@@ -95,7 +104,8 @@ project "TinyEngine" --项目名称
 		"Glad",
 		"ImGui",
 		"yaml-cpp",
-        "opengl32.lib"
+        "opengl32.lib",
+		"%{Library.mono}"
     }
 	
 	filter "files:TinyEngine/vendor/ImGuizmo/**.cpp"
@@ -110,6 +120,14 @@ project "TinyEngine" --项目名称
             "TE_PLATFORM_WINDOWS",
 			"GLFW_INCLUDE_NONE",
         }
+		
+		links
+		{
+			"%{Library.WinSock}",
+			"%{Library.WinMM}",
+			"%{Library.WinVersion}",
+			"%{Library.BCrypt}",
+		}
 
     filter "configurations:Debug"
         defines "TE_DEBUG"
@@ -272,3 +290,30 @@ project "Tiny-Editor"
         defines "TE_DIST"
         runtime "Release"
         optimize "on"
+
+project "Tiny-ScriptCore"
+	kind "SharedLib"
+	language "C#"
+	dotnetframework "4.7.2"
+
+	targetdir ("Tiny-Editor/Resources/Scripts")
+	objdir ("Tiny-Editor/Resources/Scripts/Intermediates")
+
+	files 
+	{
+		"Source/**.cs",
+		"Properties/**.cs"
+	}
+
+	filter "configurations:Debug"
+		optimize "Off"
+		symbols "Default"
+		symbols "Default"
+
+	filter "configurations:Release"
+		optimize "On"
+		symbols "Default"
+
+	filter "configurations:Dist"
+		optimize "Full"
+		symbols "Off"

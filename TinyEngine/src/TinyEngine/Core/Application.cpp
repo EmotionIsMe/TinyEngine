@@ -3,7 +3,7 @@
 #include "Application.h"
 
 #include "TinyEngine/Renderer/Renderer.h"
-
+#include "TinyEngine/Scripting/ScriptEngine.h"
 #include "Input.h"
 
 #include <glfw/glfw3.h>
@@ -34,6 +34,7 @@ namespace TinyEngine {
 		m_Window->SetEventCallback(BIND_EVENT_FN(onEvent));	// 设置window的callback为此对象的OnEvent函数
 
 		Renderer::Init();
+		ScriptEngine::Init();
 
 		// Application应该自带ImGuiLayer, 这段代码应该放到引擎内部而不是User的Application派生类里
 		m_ImGuiLayer = new ImGuiLayer();
@@ -44,6 +45,7 @@ namespace TinyEngine {
 	{
 		TE_PROFILE_FUNCTION();
 
+		ScriptEngine::Shutdown();
 		Renderer::Shutdown();
 		
 	}
