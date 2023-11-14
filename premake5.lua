@@ -292,6 +292,7 @@ project "Tiny-Editor"
         optimize "on"
 
 project "Tiny-ScriptCore"
+	location "Tiny-ScriptCore"
 	kind "SharedLib"
 	language "C#"
 	dotnetframework "4.7.2"
