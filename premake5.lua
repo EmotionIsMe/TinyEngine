@@ -302,8 +302,8 @@ project "Tiny-ScriptCore"
 
 	files 
 	{
-		"Source/**.cs",
-		"Properties/**.cs"
+		"%{prj.name}/Source/**.cs",
+		"%{prj.name}/Properties/**.cs"
 	}
 
 	filter "configurations:Debug"
