@@ -41,6 +41,8 @@ namespace TinyEngine {
 
 		Entity GetPrimaryCameraEntity();
 
+		bool IsRunning() const { return m_IsRunning; }
+
 		template<typename... Components>
 		auto GetAllEntitiesWith()
 		{
@@ -60,6 +62,7 @@ namespace TinyEngine {
 		// 创建一个registry, 可以把它理解为vector<entity>, 也就是包含所有entity的容器
 		entt::registry m_Registry;
 		uint32_t m_ViewportWidth = 0, m_ViewportHeight = 0;
+		bool m_IsRunning = false;
 
         b2World* m_PhysicsWorld = nullptr;
 
