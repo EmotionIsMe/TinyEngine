@@ -60,6 +60,8 @@ namespace TinyEngine {
 	{
 		TE_PROFILE_FUNCTION();
 
+		m_ActiveScene->OnViewportResize((uint32_t)m_ViewportSize.x, (uint32_t)m_ViewportSize.y);
+
 		// resize
 		// 放前面先画, 是为了防止重新生成Framebuffer的ColorAttachment以后, 当前帧渲染会出现黑屏的情况
 		// 当Viewport的Size改变时, 更新Framebuffer的ColorAttachment的Size, 同时调用其他函数
@@ -71,7 +73,6 @@ namespace TinyEngine {
 			m_CameraController.OnResize(m_ViewportSize.x, m_ViewportSize.y);
 
 			m_EditorCamera.SetViewportSize(m_ViewportSize.x, m_ViewportSize.y);
-			m_ActiveScene->OnViewportResize((uint32_t)m_ViewportSize.x, (uint32_t)m_ViewportSize.y);
 		}
 
 		TinyEngine::Renderer2D::ResetStats();
@@ -546,7 +547,6 @@ namespace TinyEngine {
 	void EditorLayer::NewScene()
 	{
 		m_ActiveScene = CreateRef<Scene>();
-		//m_ActiveScene->OnViewportResize((uint32_t)m_ViewportSize.x, (uint32_t)m_ViewportSize.y);
 		m_SceneHierarchyPanel.SetContext(m_ActiveScene);
 		m_EditorScenePath = std::filesystem::path();
 	}
@@ -575,7 +575,6 @@ namespace TinyEngine {
 		if (serializer.Deserialize(path.string()))
 		{
 			m_EditorScene = newScene;
-			//m_EditorScene->OnViewportResize((uint32_t)m_ViewportSize.x, (uint32_t)m_ViewportSize.y);
 			m_SceneHierarchyPanel.SetContext(m_EditorScene);
 
 			m_ActiveScene = m_EditorScene;
