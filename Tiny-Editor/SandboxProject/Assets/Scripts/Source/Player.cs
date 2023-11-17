@@ -13,7 +13,10 @@ namespace Sandbox
         private TransformComponent m_Transform;
         private Rigidbody2DComponent m_Rigidbody;
 
-        void OnCreate()
+		public float Speed;
+		public float Time = 0.0f;
+
+		void OnCreate()
         {
             Console.WriteLine($"Player.OnCreate - {ID}");
 
@@ -23,10 +26,11 @@ namespace Sandbox
 
         void OnUpdate(float ts)
         {
-            // Console.WriteLine($"Player.OnUpdate: {ts}");
+			Time += ts;
+			// Console.WriteLine($"Player.OnUpdate: {ts}");
 
-            float speed = 0.01f;
-            Vector3 velocity = Vector3.Zero;
+			float speed = Speed;
+			Vector3 velocity = Vector3.Zero;
 
             if (Input.IsKeyDown(KeyCode.W))
                 velocity.Y = 1.0f;
